@@ -8,8 +8,7 @@ import RootLayout from '../views/Layout';
 import NotFound from '../views/NotFound';
 import Register from '../views/Register';
 import SignIn from '../views/SignIn';
-
-
+import Profile from '../views/Profile';
 
 const router = createBrowserRouter([
   {
@@ -54,7 +53,10 @@ const router = createBrowserRouter([
     path: 'SignIn',
     element: <SignIn />
   },
-
+   {
+    path: 'Profile',
+    element: <Profile />
+  },
 ]);
 
 export default router;
