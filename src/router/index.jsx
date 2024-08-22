@@ -40,6 +40,10 @@ const router = createBrowserRouter([
         path: '*',
         element: <NotFound />
       },
+      {
+       path: 'Profile',
+       element: <Profile />
+     },
      
       
     ]
@@ -52,10 +56,6 @@ const router = createBrowserRouter([
   {
     path: 'SignIn',
     element: <SignIn />
-  },
-   {
-    path: 'Profile',
-    element: <Profile />
   },
 ]);
 
