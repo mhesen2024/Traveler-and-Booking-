@@ -4,6 +4,9 @@ export const getCountry = async () => {
     return  axiosInstance.get('Country');
 };
 
-export const addCountry = async(body)=>{
-    return axiosInstance.post('Country/Create',body)
-}
+
+
+  export const addCountry = async (body) => {
+      return await axiosInstance.post('Country/Create', body);
+    
+  };

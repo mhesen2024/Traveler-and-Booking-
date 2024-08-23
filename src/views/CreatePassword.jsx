@@ -1,11 +1,9 @@
     import React from 'react';
     import './CreatePassword.css';
-import Header from './Header';
 
     export default function CreatePassword() {
     return (
         <div className="createrPassword">
-            <Header />
         <div className="create-password-container">
         <h2>Create password</h2>
         <p className="instruction">

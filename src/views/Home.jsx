@@ -18,15 +18,15 @@ export default function Home() {
   const [city, setCity] = useState([]);
   const [residence, setResidence] = useState([]);
 
-  // const getUser = async () => {
-  //   try {
-  //     const response =getProfile();
-  //     console.log(response);
+  const getUser = async () => {
+    try {
+      const response =getProfile();
+      console.log(response);
       
-  //   } catch {
-  //     console.error("");
-  //   }
-  // };
+    } catch {
+      console.error("");
+    }
+  };
   const getCountryData = async () => {
     try {
       const response = await getCountry();

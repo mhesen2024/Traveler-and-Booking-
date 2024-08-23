@@ -1,73 +1,103 @@
-import React from 'react'
-import { useState } from "react";
+import { Field, Formik } from 'formik';
+import React, { useState } from 'react';
 
-
-const CityForm = () => {
-    const [city, setCity] = useState({ 
-        name:'',
-        country:'',
-        description:'',
-        image:''
-    })
-    const handleChange =(event)=>{
-        const {name , value} = event.target;
-        setCity({
-            ...city,
-        });
-    };
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        setCity({
-            ...city,
-            image: file,
-        });
-    };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setCity({
-            name:'',
-            country:'',
-            description:'',
-            image:null,
-        });
-    };
-
-
-
+export default function CityForm() {
+  const [Countries , setCountries]=useState();
   return (
-    <div className='container border-4 rounded border-gray-50 w-11/12 h-[250px] m-auto  '>
-            <h2  className=' ml-6 mt-6  roboto-medium '> Add City </h2>
-            <form onSubmit={handleSubmit} className='flex  px-5 space-x-6 justify-center gap-8 mt-5'> 
-                <div className='space-y-2 flex  flex-col   '>
-                    <label className=' roboto-regular'>City Name</label>
-                    <input type="text"  name="cityName"  value={city.name} onChange={handleChange} required
-                    className=' border-4 rounded border-gray-50  w-44 h-9' placeholder='Enter the city name'></input>
-                </div> 
-                <div className='space-y-2 flex  flex-col   '>
-                    <label className=' roboto-regular'>Country Name</label>
-                    <select className=' border-4 rounded border-gray-50  w-44 h-9' placeholder='Enter the country name' > 
-                        <option value="">Select a country</option>
-                    </select>
-                 </div>
+    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+      <Formik  
+        initialValues={{ name: '', description: '', image: '', id: '' }}
+        validate={values => {
+          const errors = {};
+          if (!values.name) {
+            errors.name = 'Required';
+          } 
+          if (!values.image) {
+            errors.image = 'Required';
+          }
+          if (!values.id) {
+            errors.id = 'Required';
+          }
+          if (!values.description) {
+            errors.description = 'Required';
+          }
+          return errors;
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+              <Field
+                type="text"
+                name="name"
+                id="name"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+              />
+              {errors.name && touched.name && <div className="text-red-600 text-sm">{errors.name}</div>}
+            </div>
+            
+            <div>
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+              <Field
+                as="textarea"
+                name="description"
+                id="description"
+                rows="4"
+                placeholder="Enter a description"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.description}
+              />
+              {errors.description && touched.description && <div className="text-red-600 text-sm">{errors.description}</div>}
+            </div>
 
-                <div className='space-y-2 flex  flex-col  '>
-                    <label className=' roboto-regular'>Description</label>
-                    <textarea   type="text"  name="description" value={city.description} onChange={handleChange} required   rows="3" placeholder="Enter the city description" className='resize-y  border-4 rounded border-gray-50  w-48 h-12'  > </textarea>
-                 </div>  
-                 <div className='space-y-2 flex  flex-col  '>
-                    <label className=' roboto-regular flex  flex-col  ' htmlFor= "cityImage" >City Image 
-                    <span >  <i className="fa fa-camera fa-2x text-[60px] mt-2  " aria-hidden="true"></i>   </span>
-                    </label>
-                    <input type="file" id='cityImage'    class="hidden" accept="image/*"  value={city.image} onChange={handleChange} required />
-                </div>
-                
-                <div className=""> 
-                    <button type="submit" className=" h-9 w-20 mt-8 bg-blue-500 text-white py-2 rounded font-medium mb-3 hover:bg-blue-700">Save</button>
-                </div> 
-                
-            </form>
-        </div> 
-  )
+            <div>
+              <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image URL</label>
+              <Field
+                type="file"
+                name="image"
+                id="image"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.image}
+              />
+              {errors.image && touched.image && <div className="text-red-600 text-sm">{errors.image}</div>}
+            </div>
+            
+            <div>
+             
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full px-4 py-2 bg-indigo-600 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Submit
+            </button>
+          </form>
+        )}
+      </Formik>
+    </div>
+  );
 }
-
-export default CityForm

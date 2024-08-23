@@ -1,80 +1,130 @@
-import React from 'react'
- import { useState} from 'react';
+import React, { useState } from 'react';
 
+const HotelForm = () => {
+  const [hotel, setHotel] = useState({
+    name: '',
+    country: '',
+    city: '',
+    description: '',
+    image: null,
+  });
 
-
-const HotelForm = () => { 
-    const [hotel, setHotel] = useState({
-        name:'',
-        country:'',
-        city:'',
-        description:'',
-        image:''
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setHotel({
+      ...hotel,
+      [name]: value,
     });
-    const handleChange =(event)=>{
-        const{name, value} = event.target;
-        setHotel({
-            ...hotel,
-        });
-    };
-    const handleImageChange = (event) =>{
-        const file = event.target.files[0];
-        setHotel({
-        ...hotel,
-        image: file,
-        });
-    };
-    const handleSubmit =(event) =>{
-        event.preventDefault();
-        setHotel({
-            name:'',
-            country:'',
-            city:'',
-            description:'',
-            image: null
-        });
-    };  
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setHotel({
+      ...hotel,
+      image: file,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Hotel Data:', hotel);
+    setHotel({
+      name: '',
+      country: '',
+      city: '',
+      description: '',
+      image: null,
+    });
+  };
+
   return (
-    <div className='container  overflow-hidden border-4 rounded border-gray-50 w-11/12 h-[250px] m-auto  '>
-    <h2  className=' ml-6 mt-6  roboto-medium  '>  Add Hotel </h2>
-    <form  onSubmit={handleSubmit} className='flex   px-5 space-x-6 justify-center gap-8 mt-5'> 
-        <div className='space-y-2 flex  flex-col   '>
-            <label className=' roboto-regular'>Hotel Name</label>
-            <input type="text"   name="hotelName" value={hotel.name}  onChange={handleChange} required 
-            className=' border-4 rounded border-gray-50  w-44 h-9' placeholder='Enter the Hotel name'></input>
-        </div>  
-        
-        <div className='space-y-2 flex  flex-col   '>
-            <label className=' roboto-regular'>Country Name</label>
-            <select className=' border-4 rounded border-gray-50  w-44 h-9' > 
-                <option   id="countries"  onChange='' >Select a country</option> 
-               
-            </select>
-         </div> 
-         <div className='space-y-2 flex  flex-col   '>
-            <label className=' roboto-regular'>City Name</label>
-            <select className=' border-4 rounded border-gray-50  w-44 h-9' > 
-                <option value="">Select a city</option>
-            </select>
-         </div>
-
-        <div className='space-y-2 flex  flex-col  '>
-            <label className=' roboto-regular'>Description</label>
-            <textarea   type="text"  name="description"  value={hotel.description}  onChange={handleChange}required   rows="3" placeholder="Enter the hotel description" className='resize-y  border-4 rounded border-gray-50  w-48 h-12'  > </textarea>
-         </div> 
-         <div className='space-y-2 flex  flex-col  '>
-            <label className=' roboto-regular flex  flex-col  ' htmlFor= "HotelImage" >Hotel Image 
-            <span >  <i className="fa fa-camera fa-2x text-[60px] mt-2  " aria-hidden="true"></i>   </span>
-            </label>
-             <input type="file" id='HotelImage'    class="hidden" accept="image/*"  value={hotel.image} onChange={handleChange} required />
+    <div className="max-w-xl mx-auto p-8 border border-gray-300 rounded-lg shadow-md bg-white">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Add Hotel</h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Hotel Name</label>
+          <input
+            type="text"
+            name="name"
+            value={hotel.name}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter the hotel name"
+          />
         </div>
-        <div className="    "> 
-            <button type="submit" className=" h-9 w-20 mt-8 bg-blue-500 text-white py-2 rounded font-medium mb-3 hover:bg-blue-700">Save</button>
-        </div> 
-        
-    </form>
-</div> 
-  )
-}
 
-export default HotelForm
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Country</label>
+          <select
+            name="country"
+            value={hotel.country}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select a country</option>
+            {/* Add options here */}
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">City</label>
+          <select
+            name="city"
+            value={hotel.city}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select a city</option>
+            {/* Add options here */}
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Description</label>
+          <textarea
+            name="description"
+            value={hotel.description}
+            onChange={handleChange}
+            required
+            rows="4"
+            placeholder="Enter the hotel description"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          ></textarea>
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium" htmlFor="HotelImage">
+            Hotel Image
+            <span className="block mt-2 text-blue-600 cursor-pointer flex items-center">
+              <i className="fa fa-camera fa-2x mr-2"></i>
+              <span className="text-base">Upload Image</span>
+            </span>
+          </label>
+          <input
+            type="file"
+            id="HotelImage"
+            name="image"
+            accept="image/*"
+            onChange={handleImageChange}
+            required
+            className="hidden"
+          />
+        </div>
+
+        <div className="text-center">
+          <button
+            type="submit"
+            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default HotelForm;
