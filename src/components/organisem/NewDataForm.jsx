@@ -14,7 +14,7 @@ const NewDataForm = () => {
         <h1 className='  roboto-medium text-center  '> Add New Location Details </h1>
     </div> 
       <div className=' space-y-4' > 
-        <CountryForm />
+        {/* <CountryForm /> */}
         <CityForm /> 
         <HotelForm />
       </div>

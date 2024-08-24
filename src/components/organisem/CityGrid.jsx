@@ -14,10 +14,7 @@ const CityGrid = () => {
   
   return (
     <div className="text-start pt-8 w-11/12 mx-auto mb-[40px] mt-[12px]">
-      {
-        console.log(city)
-        
-      }
+  
       <h2 className="text-3xl font-bold mb-4"> City </h2>
    
       <Swiper

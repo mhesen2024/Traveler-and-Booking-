@@ -6,7 +6,8 @@ export const getCountry = async () => {
 
 
 
-  export const addCountry = async (body) => {
-      return await axiosInstance.post('Country/Create', body);
-    
-  };
+export const addCountry = async (body) => {
+    return await axiosInstance.post('Country/Create', body, {
+        timeout: 20000,   
+    });
+};

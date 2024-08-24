@@ -21,7 +21,6 @@ export default function Home() {
   const getUser = async () => {
     try {
       const response =getProfile();
-      console.log(response);
       
     } catch {
       console.error("");

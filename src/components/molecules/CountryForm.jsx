@@ -5,24 +5,18 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function CountryForm() {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log(values);
-
     const formData = new FormData();
     formData.append('Name', values.Name);
     formData.append('Description', values.Description);
-    if (values.Image) {
-      formData.append('Image', values.Image);
-    }
+    formData.append('Image', values.Image);
 
     try {
-      const response = await addCountry(formData); // تأكد أن addCountry تدعم FormData
-      console.log(response.status);
-
-      if (response.status !== 200) {
+      const response = await addCountry(formData);
+      if (response.status === 400 || response.status === 401) {
         toast.error('Failed to add country');
       } else {
         toast.success('Country added successfully');
-        resetForm(); 
+        resetForm();
       }
     } catch (error) {
       toast.error('An error occurred while adding the country');
@@ -32,20 +26,24 @@ export default function CountryForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-lg mx-auto mt-12 p-8 bg-white rounded-xl shadow-lg border border-gray-200">
+      <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">Add a New Country</h2>
       <Formik
         initialValues={{ Name: '', Description: '', Image: null }}
         validate={values => {
           const errors = {};
           if (!values.Name) {
-            errors.Name = 'Required';
+            errors.Name = 'Country Name is required';
           }
           if (!values.Description) {
-            errors.Description = 'Required';
+            errors.Description = 'Description is required';
+          }
+          if (!values.Image) {
+            errors.Image = 'Image is required';
           }
           return errors;
         }}
-        onSubmit={handleSubmit} 
+        onSubmit={handleSubmit}
       >
         {({
           values,
@@ -57,25 +55,22 @@ export default function CountryForm() {
           setFieldValue,
           isSubmitting,
         }) => (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-8">
             <div>
-              <label htmlFor="Name" className="block text-sm font-semibold text-gray-700 mb-1">
+              <label htmlFor="Name" className="block text-sm font-semibold text-gray-700 mb-2">
                 Country Name
               </label>
               <Field
                 type="text"
                 name="Name"
                 placeholder="Enter the country name"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.Name}
+                className="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
-              {touched.Name && errors.Name && <div className="text-red-500 text-sm mt-1">{errors.Name}</div>}
+              <ErrorMessage name="Name" component="div" className="text-red-600 text-sm mt-2" />
             </div>
-            
+
             <div>
-              <label htmlFor="Description" className="block text-sm font-semibold text-gray-700 mb-1">
+              <label htmlFor="Description" className="block text-sm font-semibold text-gray-700 mb-2">
                 Description
               </label>
               <Field
@@ -83,36 +78,35 @@ export default function CountryForm() {
                 name="Description"
                 rows="4"
                 placeholder="Enter a description"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.Description}
+                className="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
-              {touched.Description && errors.Description && <div className="text-red-500 text-sm mt-1">{errors.Description}</div>}
+              <ErrorMessage name="Description" component="div" className="text-red-600 text-sm mt-2" />
             </div>
 
-            <div>
-              <label htmlFor="Image" className="block text-sm font-semibold text-gray-700 mb-1">
-                Image
+            <div className="text-center">
+              <label htmlFor="Image" className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block">
+                <i className="fas fa-image mr-2"></i>
+                Upload Image
               </label>
               <input
                 id="Image"
                 name="Image"
                 type="file"
-                className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="hidden"
                 onChange={(event) => {
                   const file = event.currentTarget.files[0];
-                  setFieldValue("Image", file);
+                  setFieldValue('Image', file);
                 }}
               />
+              <ErrorMessage name="Image" component="div" className="text-red-600 text-sm mt-2" />
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full py-3 bg-indigo-600 text-white font-medium rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Submit
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
           </form>
         )}

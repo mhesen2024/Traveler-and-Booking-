@@ -6,11 +6,7 @@ export const getCity = async () => {
 };
 
 export const addCity = async (body) => {
-    try {
-      const response = axiosInstance.post('City/Create', body);
-      return response;
-    } catch (error) {
-      console.error('Error adding country:', error);
-      throw error;
-    }
-  };
+  return await axiosInstance.post('City/Create', body, {
+      timeout: 20000,   
+  });
+};
