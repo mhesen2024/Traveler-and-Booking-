@@ -48,7 +48,6 @@ export default function Register() {
                     toast.error('SignUp Failed');
                 } else {
                     toast.success('SignUp success');
-                    setCredintial(response);
                     setTimeout(() => {
                         Navigate('SignIn');
                     }, 1500);

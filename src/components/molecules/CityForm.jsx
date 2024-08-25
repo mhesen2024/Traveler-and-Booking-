@@ -24,6 +24,8 @@ export default function CityForm() {
     formData.append('CountryId', values.CountryId);
     try {
       const response = await addCity(formData);
+      console.log(response.isSuccess);
+      
       if (response.status === 400 || response.status === 401) {
         toast.error('Failed to add city');
       } else {
