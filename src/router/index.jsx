@@ -9,7 +9,7 @@ import NotFound from '../views/NotFound';
 import Register from '../views/Register';
 import SignIn from '../views/SignIn';
 import Profile from '../views/Profile';
-
+import CheckOut from '../views/Checkout'; 
 const router = createBrowserRouter([
   {
     path: '/',
@@ -44,6 +44,10 @@ const router = createBrowserRouter([
        path: 'Profile',
        element: <Profile />
      },
+     {
+      path: 'Checkout',
+      element: <CheckOut />
+    },
      
       
     ]

@@ -22,9 +22,7 @@ export default function UserInfo() {
     };
 
     return (
-        <div className="w-full bg-gray-100 py-6 flex justify-center">
-            <div className="xl:w-11/12 w-full mx-auto">
-                <div className="w-4/6 bg-white shadow-md rounded-lg p-6 mb-6">
+        <div className="xl:w-4/6 mx-auto   rounded-md my-[30px]  overflow-hidden mb-9">
                     <h3 className="text-xl font-semibold mb-4 text-white bg-blue-500 p-4 rounded-lg">
                         Room 1 2 adults, 1 double bed and 1 twin bed, Non-smoking
                     </h3>
@@ -92,8 +90,7 @@ export default function UserInfo() {
                         </button>
                     </form>
                 </div>
-            </div>
-        </div>
+          
     );
 }
 

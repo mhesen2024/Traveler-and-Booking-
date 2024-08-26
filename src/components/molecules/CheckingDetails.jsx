@@ -1,58 +1,37 @@
-    import Hotel from "../../asserts/PNG/Hotel.png";
-    import Star from "..//../asserts/PNG/star.png";
-    import halfStar from "../../asserts/PNG/half-star.png";
+import Hotel from '../../asserts/PNG/Hotel.png';
+import Star from '../../asserts/PNG/star.png';
+import halfStar from '../../asserts/PNG/halfstar.png';
 
-    export default function Checking() {
-    return (
-        <div className="max-w-sm max-h-[420px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+export default function Checking() {
+  return (
+    <div className="max-w-md shadow-md rounded-md max-h-[420px] bg-white border border-gray-200">
+      <a href="#">
+        <img className="rounded-t-md w-full" src={Hotel} alt="Hotel" />
+      </a>
+      <div className="p-5">
         <a href="#">
-            <img className="rounded-t-lg" src={Hotel} alt="Hotel" /> {/* Use the imported image */}
-        </a>
-        <div className="p-5">
-            <a href="#">
-            <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-            Lakeside Motel Warefront
-            </h5>
-            <div className="rating flex"
-            >
-            <img src={Star} />
-            <img src={Star} />
-            <img src={Star} />
-            <img src={Star} />
-            <img src = {halfStar} />
-            <p
-            style={{
-                marginLeft: "10px",
-                fontWeight: "400",
-                fontSize: "14px",
-                color: "#4F4F4F",
-            }}
-            >4.5 (1200 Reviews)</p>
-            </div>
-            </a>
-            <div className="cardTextContent my-6 text-sm ">
-            <p className="text-sm leading-8  font-normal text-rose-600">
-            Non refundable 
+          <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900">
+            Lakeside Motel Waterfront
+          </h5>
+          <div className="rating flex items-center">
+            <img src={Star} alt="Star" className="h-4 w-4"/>
+            <img src={Star} alt="Star" className="h-4 w-4"/>
+            <img src={Star} alt="Star" className="h-4 w-4"/>
+            <img src={Star} alt="Star" className="h-4 w-4"/>
+            <img src={halfStar} alt="Half Star" className="h-4 w-4"/>
+            <p className="ml-2 text-sm font-medium text-gray-600">
+              4.5 (1200 Reviews)
             </p>
-            <p style={{
-                lineHeight: "32px",
-                color: "#4F4F4F",
-            }}>Check in: Sunday, March 18, 2022</p>
-            <p
-            style={{
-                lineHeight: "32px",
-                color: "#4F4F4F",
-            }}
-            >Check out: Tuesday, March 20, 2022</p>
-            <p
-            style={{
-                lineHeight: "32px",
-                color: "#4F4F4F",
-            }}
-            >2 night stay</p>
-            </div>
+          </div>
+        </a>
+        <div className="cardTextContent my-4 text-sm">
+          <p className="text-sm font-normal text-rose-600">Non refundable</p>
+          <p className="leading-8 text-gray-600">Check in: Sunday, March 18, 2022</p>
+          <p className="leading-8 text-gray-600">Check out: Tuesday, March 20, 2022</p>
+          <p className="leading-8 text-gray-600 pb-4">2 night stay</p>
         </div>
-        </div>
-    );
-    }
-
+      </div>
+    </div>
+  );
+}

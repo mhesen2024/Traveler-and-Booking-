@@ -1,6 +1,5 @@
 import HotelImage from '../atoms/HotelImage';
-import img from '../../asserts/PNG/resturant.jpeg'; // إذا كنت تستخدم صورة ثابتة، تأكد من استخدام الصورة المناسبة
-
+import img from '../../asserts/PNG/resturant.jpeg'; 
 const HotelCard = ({ city }) => (
   <div className="rounded-lg overflow-hidden border border-gray-200 shadow-lg duration-300 hover:shadow-xl">
     <div className="relative overflow-hidden h-48">
