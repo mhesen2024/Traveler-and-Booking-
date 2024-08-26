@@ -59,6 +59,7 @@ const About = () => {
           <h1 className="text-4xl sm:text-5xl font-extrabold text-center ">Our Team</h1>
           <MyProfileCard contacts={contacts} />
         </section>
+    
       </div>
     </div>
   );
