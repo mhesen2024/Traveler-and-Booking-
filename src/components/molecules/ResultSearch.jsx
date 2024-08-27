@@ -51,7 +51,7 @@ const ResultSearch = () => {
             <div className="text-right">
               <p className="text-sm text-gray-600">1 room 2 days</p>
               <p className="text-xs text-gray-500 line-through">$150</p>
-              <p className="text-xl font-bold text-gray-900">$130</p>
+              <p className="text-xl font-bold text-red-700 ">$130</p>
               <p className="text-xs text-gray-500">Includes taxes and fees</p>
             </div>
           </div>
