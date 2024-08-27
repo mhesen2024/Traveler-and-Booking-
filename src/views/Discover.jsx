@@ -1,4 +1,4 @@
-import Sidebar from "./Sidebar";
+import Sidebar from "../components/organisem/Sidebar";
 import ResultSearch from "../components/molecules/ResultSearch";
 import Footer from "../components/organisem/Footer";
 
