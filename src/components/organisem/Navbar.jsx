@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import NavLinks from "../molecules/NavLinks";
 import Logo from "../../views/Logo";
-//import profilePictureUrl from '../../asserts/profile-picture-url.png'
 import profilePic from "../../asserts/PNG/profile-picture-url.png";
 
 function Navbar() {
