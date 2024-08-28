@@ -23,9 +23,7 @@ export default function CityForm() {
     formData.append('Image', values.Image);
     formData.append('CountryId', values.CountryId);
     try {
-      const response = await addCity(formData);
-      console.log(response.isSuccess);
-      
+      const response = await addCity(formData);      
       if (response.status === 400 || response.status === 401) {
         toast.error('Failed to add city');
       } else {

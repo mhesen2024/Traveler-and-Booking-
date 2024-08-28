@@ -1,3 +1,3 @@
 export const setCredintial=(response)=>{
-localStorage.setItem('token',response.data.data.token)
+localStorage.setItem('userName',response.data.data.userName)
 }

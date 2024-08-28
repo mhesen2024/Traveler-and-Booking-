@@ -7,25 +7,16 @@ import TripGrid from "../components/organisem/TripGrid";
 import { getCountry } from "../API/endpoint/country";
 import { createContext, useEffect, useState } from "react";
 import { getCity } from "../API/endpoint/city";
-import { Residence } from "../API/endpoint/Residence";
-import { getProfile } from "../API/endpoint/profile";
+import { ResidenceType } from "../API/endpoint/Residence";
 
 export const CountryContext = createContext();
 
 export default function Home() {
-  const [user, setUser] = useState([]);
   const [countries, setcountries] = useState([]);
-  const [city, setCity] = useState([]);
-  const [residence, setResidence] = useState([]);
+  const [cites, setCity] = useState([]);
+  const [residenceType, setResidenceType] = useState([]);
 
-  const getUser = async () => {
-    try {
-      const response =getProfile();
-      
-    } catch {
-      console.error("");
-    }
-  };
+
   const getCountryData = async () => {
     try {
       const response = await getCountry();
@@ -44,8 +35,8 @@ export default function Home() {
   };
   const getResidence = async () => {
     try {
-      const response = await Residence();
-      setResidence(response.data.data);
+      const response = await ResidenceType();
+      setResidenceType(response.data.data);
     } catch {
       console.error("");
     }
@@ -55,12 +46,10 @@ export default function Home() {
     getCountryData();
     getCityData();
     getResidence();
-getUser();
-    
   }, []);
 
   return (
-    <CountryContext.Provider value={{ countries, city, residence }}>
+    <CountryContext.Provider value={{ countries, cites, residenceType }}>
       <Header />
       <CountryGrid />
       <TripGrid />

@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import NavLinks from "../molecules/NavLinks";
 import Logo from "../../views/Logo";
-//import profilePictureUrl from '../../asserts/profile-picture-url.png'
-import profilePic from "../../asserts/PNG/profile-picture-url.png";
+import profilePic from "../../asserts/PNG/profile.png";
+import { getProfile } from "../../API/endpoint/profile";
 
 function Navbar() {
-  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Authentication status
-  const [user, setUser] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [imgProfile, setImgProfile] = useState(profilePic); // Default to profilePic
   const menuLinks = [
     { to: "/", title: "Home" },
     { to: "/Discover", title: "Discover" },
@@ -18,7 +18,31 @@ function Navbar() {
     { to: "/About", title: "About" },
     { to: "/Contact", title: "Contact" }
   ];
-  
+
+  const getUser = async () => {
+    try {
+      const response = await getProfile(); 
+      const data = response.data.data;
+      localStorage.setItem('user', JSON.stringify(data));
+      setImgProfile(data.imageUrl || profilePic); 
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error("Failed to fetch user data", error);
+      setIsAuthenticated(false);
+    }
+  };
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setImgProfile(storedUser.imageUrl || profilePic);
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+      getUser(); 
+    }
+  }, []);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -33,7 +57,6 @@ function Navbar() {
 
       {isAuthenticated ? (
         <>
-          {/* Navbar for authenticated users */}
           <ul className="hidden tablet:flex gap-[48px] text-[16px] text-[#333]">
             {menuLinks.map((link, index) => (
               <NavLinks
@@ -45,22 +68,28 @@ function Navbar() {
             ))}
           </ul>
           <div className="hidden tablet:flex items-center gap-[20px]">
-            <div className="notification">
-              <i className="fa fa-bell text-[#2F80ED] fa-xl"></i>
-            </div>
             <div className="profile">
               <img
-                src={profilePic}
+                src={imgProfile}
                 alt="Profile"
-                className="rounded-full w-[40px] h-[40px]"
+                className="rounded-full w-[40px] object-cover h-[40px] cursor-pointer"
+                onClick={() => navigate('/profile')}
               />
-              {/*  <img src={profilePictureUrl} alt="Profile" className="rounded-full w-[40px] h-[40px]" /> */}
             </div>
+            <Link
+              to="/SignIn"
+              className="bg-[#2F80ED] shadow-md text-white px-[18px] py-[10px] rounded hover:bg-blue-700 transition duration-300"
+              onClick={() => {
+                localStorage.clear();
+                setIsAuthenticated(false);
+              }}
+            >
+              Log Out
+            </Link>
           </div>
         </>
       ) : (
         <>
-  
           <ul className="hidden tablet:flex gap-[48px] text-[16px] text-[#333]">
             {menuLinks.map((link, index) => (
               <NavLinks
@@ -88,7 +117,6 @@ function Navbar() {
         </>
       )}
 
-      {/* Mobile menu button */}
       <div className="tablet:hidden flex items-center">
         <button
           className="text-[#2F80ED] hover:text-blue-600 focus:outline-none"
@@ -97,7 +125,6 @@ function Navbar() {
           <i className="fa-solid fa-bars fa-xl"></i>
         </button>
       </div>
-      {/* Mobile menu */}
       <div
         className={`${
           isMobileMenuOpen ? "block" : "hidden"
@@ -114,7 +141,7 @@ function Navbar() {
               </div>
               <div className="profile">
                 <img
-                  src="profile-picture-url"
+                  src={imgProfile}
                   alt="Profile"
                   className="rounded-full w-[40px] h-[40px]"
                 />

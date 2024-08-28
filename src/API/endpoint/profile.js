@@ -1,10 +1,12 @@
 import axiosInstance from "../axios/api";
 
+const userName = localStorage.getItem("userName") || '';
 export const getProfile = async () => {
-    const token = localStorage.getItem("token")|| '';
-        return response = await axiosInstance.get('User/Profile', {
-        Headers: {
-            'Authorization': `Bearer ${token}`,
-        }
-    });
+    const response =await  axiosInstance.get(`User/Profile/${userName}`);    
+    return response;
+};
+
+export const updateProfile =async (body)=>{
+    const response = await axiosInstance.put(`User/Profile/${userName}`,body );
+    return response ;
 }

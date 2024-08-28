@@ -8,7 +8,7 @@ import { CountryContext } from "../../views/Home";
 
 
 const CityGrid = () => {
-  const { city} = useContext(CountryContext);
+  const { cites} = useContext(CountryContext);
 
   
   
@@ -39,7 +39,7 @@ const CityGrid = () => {
         modules={[Navigation]}
         className="mySwiper"
       >
-        {city.map((city, index) => (
+        {cites.map((city, index) => (
           <SwiperSlide key={index}>
             <HotelCard city={city} />
           </SwiperSlide>

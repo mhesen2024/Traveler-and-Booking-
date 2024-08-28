@@ -1,68 +1,115 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
+import { useNavigate } from "react-router";
+import profilePic from "../asserts/PNG/profile.png";
+import { Link } from "react-router-dom";
+import { getProfile, updateProfile } from "../API/endpoint/profile";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Profile() {
-  const [profilePicture, setProfilePicture] = useState(() => localStorage.getItem("profilePicture") || '');
-  const user = localStorage.getItem("user") || "Guest";
-  const email = localStorage.getItem("emailStored") || "example@example.com";
+  const dataUser = JSON.parse(localStorage.getItem("user")) || {};
+  const [firstName, setFirstName] = useState(dataUser.firstName || "First Name");
+  const [lastName, setLastName] = useState(dataUser.lastName || "Last Name");
+  const [email, setEmail] = useState(dataUser.email || "example@mail.com");
+  const [phoneNumber, setPhoneNumber] = useState(dataUser.phoneNumber || "123-456-7890");
+  const [imgProf, setImgProf] = useState(dataUser.imageUrl || profilePic);
+  const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
-  // Function to handle file input change
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      // Save the image to localStorage
-      localStorage.setItem("profilePicture", reader.result);
-      setProfilePicture(reader.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
+  const getUser = async () => {
+    try {
+      const response = await getProfile();
+      const data = response.data.data;
+      localStorage.setItem('user', JSON.stringify(data));
+    } catch (error) {
+      console.error("Failed to fetch user profile:", error);
     }
   };
 
+  const updateData = async () => {
+    const formData = new FormData();
+    formData.append('FirstName', firstName);
+    formData.append('LastName', lastName);
+    formData.append('Email', email);
+    formData.append('PhoneNumber', phoneNumber);
+    if (image) formData.append('Image', image);
+  
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+  
+    try {
+      const response = await updateProfile(formData);
+      if (response.status === 200) {
+        toast.success('Profile updated successfully');
+      } else {
+        toast.error('Failed to update profile');
+      }
+    } catch (error) {
+      toast.error('An error occurred while updating the profile');
+    }
+  };
+  
+
+  useEffect(() => {
+    if (!dataUser.email) {
+      navigate("/");
+    }
+    getUser();
+  }, [dataUser.email, navigate]);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if(file){
+      setImage(e.target.files[0]);
+      updateData();
+    } 
+  };
+
   return (
-    <div className="bg-gradient-to-r  from-[#2c3e50] to-[#4ca1af] p-6 text-white rounded-lg shadow-lg max-w-md mx-auto">
-      <div className="flex flex-col items-center">
-        <div className="w-32 h-32 mb-4">
-          {profilePicture && (
-            <img
-              src={profilePicture}
-              alt="Profile"
-              className="w-full h-full object-cover rounded-full border-4 border-white"
-            />
-          )}
+    <div className="bg-gray-900 p-8 text-white rounded-lg mt-[100px] shadow-lg mx-auto max-w-full lg:max-w-5xl">
+      <div className="flex flex-col md:flex-row items-center">
+        <div className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] xl:w-[250px] xl:h-[250px] xl:mx-16 mb-4 md:mb-0 md:mr-8">
+          <img
+            src={imgProf}
+            alt="Profile"
+            className="w-full h-full object-cover"
+          />
         </div>
-        <div className="text-center">
-          <b className="text-xl font-semibold">{user}</b>
-          <p className="text-sm text-gray-300 flex items-center justify-center mt-2">
-            <i className="fa-solid fa-envelope mr-2"></i>
+        <div className="text-center md:text-left flex-1">
+          <h2 className="text-2xl md:text-3xl font-bold text-blue-500">
+            {firstName} {lastName}
+          </h2>
+          <p className="text-sm text-gray-400 flex items-center justify-center md:justify-start mt-3">
+            <i className="fa-solid fa-envelope mr-2 text-blue-500"></i>
             {email}
           </p>
-          <p className="text-sm text-gray-300 flex items-center justify-center mt-1">
-            <i className="fa-solid fa-location-dot mr-2"></i> New York, USA
+          <p className="text-sm text-gray-400 flex items-center justify-center md:justify-start mt-2">
+            <i className="fa-solid fa-phone mr-2 text-blue-500"></i>
+            {phoneNumber}
           </p>
         </div>
-        <div className="mt-4">
+      </div>
+      <div className="mt-6 flex flex-col md:flex-row items-center justify-center md:justify-between">
+        <Link to="/" className="inline-block xl:mx-16 mb-4 md:mb-0">
+          <Logo />
+        </Link>
+        <div>
           <label
             htmlFor="profile-picture-upload"
-            className="cursor-pointer text-blue-400 flex items-center justify-center"
+            className="cursor-pointer text-blue-400 hover:text-blue-600 flex items-center justify-center md:justify-start transition duration-300"
           >
-            <i className="fa-solid fa-upload mr-2"></i> Choose Picture
+            <i className="fa-solid fa-upload mr-2"></i> Upload Picture
           </label>
           <input
             id="profile-picture-upload"
             type="file"
-            onChange={handleFileChange}
-            accept="image/*"
+            onChange={handleImageChange}
             className="hidden"
           />
         </div>
-        <a href="/home" className="mt-6 inline-block">
-          <Logo/>
-        </a>
       </div>
+      <Toaster />
     </div>
   );
 }
