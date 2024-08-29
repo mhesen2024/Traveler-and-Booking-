@@ -1,9 +1,9 @@
-import NewDataForm from "../components/organisem/NewDataForm" 
+import SideBarActivity from "../components/organisem/SideBarActivity" 
 
 export default function Activities() {
   return (
     <div>
-      <NewDataForm />
+      <SideBarActivity />
     </div>
   )
 }
