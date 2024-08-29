@@ -5,7 +5,7 @@ import HalfStar from '../../asserts/PNG/halfstar.png';
 
 const ResultSearch = () => {
     return (
-      <div className="flex bg-white shadow-md p-4 rounded-md overflow-hidden w-full max-w-4xl border border-gray-200 mt-[304px]">
+      <div className="flex bg-white shadow-md rounded-md overflow-hidden w-full max-w-4xl border border-gray-200 mt-[304px]">
         {/* Left: Hotel Image */}
         <img
           src={HotelImage}
@@ -50,7 +50,7 @@ const ResultSearch = () => {
             {/* Pricing Section */}
             <div className="text-right">
               <p className="text-sm text-gray-600">1 room 2 days</p>
-              <p className="text-xs text-red-700 line-through">$150</p>
+              <p className="text-xs text-gray-500 line-through">$150</p>
               <p className="text-xl font-bold text-gray-900">$130</p>
               <p className="text-xs text-gray-500">Includes taxes and fees</p>
             </div>
