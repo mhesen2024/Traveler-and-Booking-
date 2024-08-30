@@ -10,6 +10,10 @@ import Register from '../views/Register';
 import SignIn from '../views/SignIn';
 import Profile from '../views/Profile';
 import CheckOut from '../views/Checkout'; 
+import CountryForm from '../components/molecules/CountryForm';
+import CityForm from '../components/molecules/CityForm';
+import HotelForm from '../components/molecules/HotelForm';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -35,21 +39,30 @@ const router = createBrowserRouter([
         path: 'discover',
         element: <Discover />
       },
-
+      {
+        path: 'add-country',
+        element: <CountryForm />
+      },
+      {
+        path: 'add-city',
+        element: <CityForm />
+      },
+      {
+        path: 'add-hotel',
+        element: <HotelForm />
+      },
       {
         path: '*',
         element: <NotFound />
       },
       {
-       path: 'Profile',
-       element: <Profile />
-     },
-     {
-      path: 'Checkout',
-      element: <CheckOut />
-    },
-     
-      
+        path: 'Profile',
+        element: <Profile />
+      },
+      {
+        path: 'Checkout',
+        element: <CheckOut />
+      },
     ]
   },
   {
