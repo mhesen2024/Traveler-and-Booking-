@@ -4,13 +4,12 @@ import "./Navbar.css";
 import NavLinks from "../molecules/NavLinks";
 import Logo from "../../views/Logo";
 import profilePic from "../../asserts/PNG/profile.png";
-import { getProfile } from "../../API/endpoint/profile";
 
 function Navbar() {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [imgProfile, setImgProfile] = useState(profilePic); // Default to profilePic
+  const [imgProfile, setImgProfile] = useState(profilePic); 
   const menuLinks = [
     { to: "/", title: "Home" },
     { to: "/Discover", title: "Discover" },
@@ -18,19 +17,11 @@ function Navbar() {
     { to: "/About", title: "About" },
     { to: "/Contact", title: "Contact" }
   ];
+  const handleLogOut =()=>{
+    localStorage.clear()
+    setIsAuthenticated(false);
+  }
 
-  const getUser = async () => {
-    try {
-      const response = await getProfile(); 
-      const data = response.data.data;
-      localStorage.setItem('user', JSON.stringify(data));
-      setImgProfile(data.imageUrl || profilePic); 
-      setIsAuthenticated(true);
-    } catch (error) {
-      console.error("Failed to fetch user data", error);
-      setIsAuthenticated(false);
-    }
-  };
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -39,9 +30,8 @@ function Navbar() {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
-      getUser(); 
     }
-  }, []);
+  },[],isAuthenticated);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -79,10 +69,7 @@ function Navbar() {
             <Link
               to="/SignIn"
               className="bg-[#2F80ED] shadow-md text-white px-[18px] py-[10px] rounded hover:bg-blue-700 transition duration-300"
-              onClick={() => {
-                localStorage.clear();
-                setIsAuthenticated(false);
-              }}
+              onClick={handleLogOut}
             >
               Log Out
             </Link>

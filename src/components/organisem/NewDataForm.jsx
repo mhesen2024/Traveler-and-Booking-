@@ -1,7 +1,7 @@
 import React from 'react'
 import CountryForm from '../molecules/CountryForm'
 import CityForm from '../molecules/CityForm'
-import HotelForm from '../molecules/HotelForm'
+import ResidanceForm from '../molecules/ResidanceForm'
  
 
 
@@ -14,9 +14,9 @@ const NewDataForm = () => {
         <h1 className='  roboto-medium text-center  '> Add New Location Details </h1>
     </div> 
       <div className=' space-y-4' > 
-        {/* <CountryForm /> */}
+        <CountryForm />
         <CityForm /> 
-        <HotelForm />
+        <ResidanceForm />
       </div>
     </div>
   )

@@ -8,9 +8,9 @@ import toast, { Toaster } from "react-hot-toast";
 
 export default function Profile() {
   const dataUser = JSON.parse(localStorage.getItem("user")) || {};
-  const [firstName, setFirstName] = useState(dataUser.firstName || "First Name");
-  const [lastName, setLastName] = useState(dataUser.lastName || "Last Name");
-  const [email, setEmail] = useState(dataUser.email || "example@mail.com");
+  const [firstName, setFirstName] = useState(dataUser.firstName );
+  const [lastName, setLastName] = useState(dataUser.lastName );
+  const [email, setEmail] = useState(dataUser.email );
   const [phoneNumber, setPhoneNumber] = useState(dataUser.phoneNumber || "123-456-7890");
   const [imgProf, setImgProf] = useState(dataUser.imageUrl || profilePic);
   const [image, setImage] = useState(null);
@@ -31,15 +31,12 @@ export default function Profile() {
     formData.append('FirstName', firstName);
     formData.append('LastName', lastName);
     formData.append('Email', email);
+    formData.append('Image', image);
     formData.append('PhoneNumber', phoneNumber);
-    if (image) formData.append('Image', image);
-  
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-  
     try {
       const response = await updateProfile(formData);
+      console.log(response);
+      
       if (response.status === 200) {
         toast.success('Profile updated successfully');
       } else {

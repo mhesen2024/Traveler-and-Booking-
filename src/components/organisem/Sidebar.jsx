@@ -1,9 +1,9 @@
 import React from 'react'
-import Search from '../components/molecules/Search'
-import Price from '../components/molecules/Price'
-import Rating from '../components/molecules/Rating'
-import Category from '../components/molecules/Category'
-import Activities from '../components/molecules/Activities'
+import Search from '../molecules/Search'
+import Price from '../molecules/Price'
+import Rating from '../molecules/Rating'
+import Category from '../molecules/Category'
+import Activities from '../molecules/Activities'
 
 export default function Sidebar() {
   return (

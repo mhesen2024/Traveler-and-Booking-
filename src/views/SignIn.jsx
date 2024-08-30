@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Logo from "./Logo";
 import { Login } from "../API/endpoint/signIn";
+import { getProfile } from "../API/endpoint/profile";
 import toast, { Toaster } from 'react-hot-toast';
 import { setCredintial } from "../helpers";
 
@@ -25,6 +26,7 @@ export default function SignIn() {
         toast.error('Login Failed');
       } else {
         toast.success('Login success')
+        getUser()
         setCredintial(response)
         setTimeout(()=>{
             navigate('/');
@@ -33,6 +35,15 @@ export default function SignIn() {
       }
     } catch (error) {
       toast.error('Login Failed');
+    }
+  };
+  const getUser = async () => {
+    try {
+      const response = await getProfile(); 
+      const data = response.data.data;
+      localStorage.setItem('user', JSON.stringify(data));
+    } catch (error) {
+      console.error("Failed to fetch user data", error);
     }
   };
 

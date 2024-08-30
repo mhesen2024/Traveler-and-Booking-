@@ -84,7 +84,7 @@ export default function FormSearch() {
           value={city}
         >
           <option hidden>City</option>
-          {filteredCities.map((city) => (
+          { filteredCities.map((city) => (
             <option className="text-base" key={city.id} value={city.name}>
               {city.name}
             </option>

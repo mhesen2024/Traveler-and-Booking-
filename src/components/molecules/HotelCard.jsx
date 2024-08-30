@@ -1,7 +1,8 @@
 import HotelImage from '../atoms/HotelImage';
 import img from '../../asserts/PNG/resturant.jpeg'; 
 const HotelCard = ({ city }) => (
-  <div className="rounded-lg overflow-hidden border border-gray-200 shadow-lg duration-300 hover:shadow-xl">
+  <div className="rounded-lg overflow-hidden border border-gray-200 shadow-lg duration-300 hover:shadow-xl" onClick={()=>{console.log(city.id);
+   }}>
     <div className="relative overflow-hidden h-48">
       <HotelImage src={city.imageUrl || img} alt={city.name} className="object-cover w-full h-full" />
     </div>
