@@ -12,7 +12,7 @@ export default function CountryCard({countries}) {
     <CountryImage src={countries.imageUrl} alt={countries.name} />
     
     <div className="p-4">
-      <h3 className="text-xl font-semibold">{countries.name}</h3>
+      <h3 className="text-xl font-semibold capitalize">{countries.name}</h3>
     </div>
   </div>
   )

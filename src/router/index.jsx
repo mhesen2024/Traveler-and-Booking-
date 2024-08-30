@@ -12,7 +12,7 @@ import Profile from '../views/Profile';
 import CheckOut from '../views/Checkout'; 
 import CountryForm from '../components/molecules/CountryForm';
 import CityForm from '../components/molecules/CityForm';
-import HotelForm from '../components/molecules/HotelForm';
+import ResidanceForm from '../components/molecules/ResidanceForm';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +29,22 @@ const router = createBrowserRouter([
       },
       {
         path: 'activities',
-        element: <Activities />
+        element: <Activities />,
+        children:[{
+          path: 'add-country',
+          element: <CountryForm />
+        },
+        {
+          path: 'add-city',
+          element: <CityForm />
+        },
+        {
+          path: 'ResidanceForm',
+          element: <ResidanceForm />
+        },
+      ]
+
+        
       },
       {
         path: 'contact',
@@ -38,18 +53,6 @@ const router = createBrowserRouter([
       {
         path: 'discover',
         element: <Discover />
-      },
-      {
-        path: 'add-country',
-        element: <CountryForm />
-      },
-      {
-        path: 'add-city',
-        element: <CityForm />
-      },
-      {
-        path: 'add-hotel',
-        element: <HotelForm />
       },
       {
         path: '*',

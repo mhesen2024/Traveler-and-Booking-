@@ -42,7 +42,7 @@ export default function CityForm() {
   }, []);
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="max-w-lg mx-auto my-[30px] p-6 bg-white shadow-md rounded-lg">
       <h1 className='text-center p-4 text-[27px]'>
         Add City
       </h1>
@@ -123,7 +123,7 @@ export default function CityForm() {
               />
               {errors.Description && touched.Description && <div className="text-red-600 text-sm">{errors.Description}</div>}
             </div>
-            <div>
+            <div className='text-center'>
               <label htmlFor="image" className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block">
                 <i className="fas fa-image mr-2"></i>
                 Upload Image

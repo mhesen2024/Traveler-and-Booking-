@@ -1,36 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaHome, FaCity, FaGlobe } from "react-icons/fa";
 
-export default function SideBarActivity() {
+export default function MenuActivity() {
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <div className="fixed z-30 h-full bg-blue-500 w-56 lg:w-1/5 p-4">
-        <h1 className="text-white text-2xl font-bold mb-8">Menu</h1>
-        <ul className="space-y-4">
-          <li>
-            <Link to="/add-hotel" className="text-white block">
-              Add Hotel
-            </Link>
-          </li>
-          <li>
-            <Link to="/add-city" className="text-white block">
-              Add City
-            </Link>
-          </li>
-          <li>
-            <Link to="/add-country" className="text-white block">
-              Add Country
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 p-8 ml-56 lg:ml-[20%]">
-        <h2 className="text-2xl font-bold">Dashboard</h2>
-        <p>Welcome to the admin dashboard!</p>
-      </div>
+    <div >
+      <h1 className="text-white text-4xl font-bold mb-8 text-center">Menu</h1>
+      <ul className="flex flex-col md:flex-row md:justify-center gap-6">
+        <li>
+          <Link
+            to="/activities/add-country"
+            className="flex items-center space-x-4 p-4 rounded-lg bg-blue-500 hover:bg-blue-700 transition-colors duration-300 shadow-md hover:shadow-xl"
+          >
+            <FaGlobe className="text-white text-2xl" />
+            <span className="text-white text-lg font-semibold">Add Country</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/activities/add-city"
+            className="flex items-center space-x-4 p-4 rounded-lg bg-blue-500 hover:bg-blue-700 transition-colors duration-300 shadow-md hover:shadow-xl"
+          >
+            <FaCity className="text-white text-2xl" />
+            <span className="text-white text-lg font-semibold">Add City</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/activities/ResidanceForm"
+            className="flex items-center space-x-4 p-4 rounded-lg bg-blue-500 hover:bg-blue-700 transition-colors duration-300 shadow-md hover:shadow-xl"
+          >
+            <FaHome className="text-white text-2xl" />
+            <span className="text-white text-lg font-semibold">Add Residence</span>
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 }
