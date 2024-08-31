@@ -26,11 +26,11 @@ export default function SignIn() {
         toast.error('Login Failed');
       } else {
         toast.success('Login success')
-        getUser()
         setCredintial(response)
         setTimeout(()=>{
-            navigate('/');
+          navigate('/');
         },1000)
+        getUser()
 
       }
     } catch (error) {

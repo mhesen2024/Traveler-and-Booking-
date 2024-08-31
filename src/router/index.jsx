@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import About from '../views/About';
 import Home from '../views/Home';
-import Activities from '../views/Activities';
+import Activities from '../views/add';
 import Contact from '../views/Contact';
 import Discover from '../views/Discover';
 import RootLayout from '../views/Layout';
@@ -13,6 +13,8 @@ import CheckOut from '../views/Checkout';
 import CountryForm from '../components/molecules/CountryForm';
 import CityForm from '../components/molecules/CityForm';
 import ResidanceForm from '../components/molecules/ResidanceForm';
+import Add from '../views/add';
+import RoomForm from '../components/molecules/RoomForm';
 
 const router = createBrowserRouter([
   {
@@ -28,11 +30,16 @@ const router = createBrowserRouter([
         element: <About />
       },
       {
-        path: 'activities',
-        element: <Activities />,
-        children:[{
+        path: 'add',
+        element: <Add />,
+        children:[
+          {
           path: 'add-country',
           element: <CountryForm />
+        },
+          {
+          path: 'add-room',
+          element: <RoomForm />
         },
         {
           path: 'add-city',

@@ -13,7 +13,7 @@ export default function Profile() {
   const [email, setEmail] = useState(dataUser.email );
   const [phoneNumber, setPhoneNumber] = useState(dataUser.phoneNumber || "123-456-7890");
   const [imgProf, setImgProf] = useState(dataUser.imageUrl || profilePic);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState();
   const navigate = useNavigate();
 
   const getUser = async () => {
@@ -27,6 +27,12 @@ export default function Profile() {
   };
 
   const updateData = async () => {
+    console.log(firstName);
+    console.log(lastName);
+    console.log(email);
+    console.log(image);
+    console.log(phoneNumber);
+    
     const formData = new FormData();
     formData.append('FirstName', firstName);
     formData.append('LastName', lastName);
@@ -35,7 +41,6 @@ export default function Profile() {
     formData.append('PhoneNumber', phoneNumber);
     try {
       const response = await updateProfile(formData);
-      console.log(response);
       
       if (response.status === 200) {
         toast.success('Profile updated successfully');
@@ -55,13 +60,7 @@ export default function Profile() {
     getUser();
   }, [dataUser.email, navigate]);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if(file){
-      setImage(e.target.files[0]);
-      updateData();
-    } 
-  };
+
 
   return (
     <div className="bg-gray-900 p-8 text-white rounded-lg mt-[100px] shadow-lg mx-auto max-w-full lg:max-w-5xl">
@@ -101,9 +100,15 @@ export default function Profile() {
           <input
             id="profile-picture-upload"
             type="file"
-            onChange={handleImageChange}
+            onChange={(event) => {
+              setImage(event.currentTarget.files[0]);        
+            }}
             className="hidden"
-          />
+            />
+      <button onClick={updateData}>
+        upload
+                 
+      </button>
         </div>
       </div>
       <Toaster />

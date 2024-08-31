@@ -2,15 +2,7 @@ import React, { useState } from 'react'
 
 export default function Activities() {
 
-    /*
-    const [activity, setActivity] = useState("activities");
-    const filterActivity = (activeItem) => {
-        const result = activities.filter((curActivity) => {
-            return  curActivity.activity === curActivity ;
-        }); 
-        setActivity(result);
-    }
-*/
+
 
 
 
