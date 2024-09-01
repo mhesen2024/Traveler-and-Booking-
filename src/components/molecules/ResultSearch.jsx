@@ -9,11 +9,16 @@ import ShanghaiOpen from '../../asserts/PNG/Shanghai Open.png';
 import OceanWavesResort from '../../asserts/PNG/Ocean Waves Resort.png';
 import MaimiCityfrontier from '../../asserts/PNG/Maimi City frontier.png';
 import LakesideMotelWarefront from '../../asserts/PNG/Lakeside Motel Warefront.png'; 
+import { useNavigate } from 'react-router-dom';  
 
 
+export const HotelCard = ({ hotel }) => {
+  const navigate = useNavigate();  
 
+  const handleAvailabilityClick = () => {
+    navigate('/Checkout');  
+  };
 
-const HotelCard = ({ hotel }) => {
   return (
     <div className="flex bg-white shadow-md rounded-md overflow-hidden w-full max-w-4xl border border-gray-200 mt-[20px]">
       {/* Left: Hotel Image */}
@@ -49,7 +54,10 @@ const HotelCard = ({ hotel }) => {
         
         {/* See Availability Button */}
         <div className="flex justify-between items-center mt-4">
-          <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded-md">
+          <button 
+            className="bg-blue-500 text-white text-sm px-4 py-2 rounded-md"
+            onClick={handleAvailabilityClick}  // Handle click event
+          >
             See availability
           </button>
           
@@ -65,11 +73,13 @@ const HotelCard = ({ hotel }) => {
         </div>
       </div>
     </div>
-    
   );
 };
 
+
+
 const ResultSearch = () => {
+
   const hotels = [
     {
       image: HotelImage,
