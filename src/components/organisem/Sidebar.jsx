@@ -45,15 +45,15 @@ export default function Sidebar() {
         } sm:relative sm:translate-x-0 sm:w-72`}
       >
         <div className="container flex flex-col space-y-4 sm:space-y-6 mt-12 sm:mt-16 md:mt-24 cursor-auto">
-        <Search />
+          <Search />
           <div className="ml-4">
             <h1 className="text-gray-800 text-lg font-bold">Filter by</h1>
           </div>
-        <Price /> 
-        <Rating />
-        <Category />
-        <Activities />
-    </div>
+          <Price />
+          <Rating />
+          <Category />
+          <Activities />
+        </div>
       </div>
     </div>
   );
