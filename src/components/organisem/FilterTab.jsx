@@ -2,11 +2,11 @@ import React from 'react';
 
 const FilterTabs = ({ tabs, activeTab, onTabClick }) => {
   return (
-    <div className="flex bg-white rounded-lg overflow-hidden w-full max-w-4xl mt-4 shadow">
+    <div className="flex bg-white rounded-lg overflow-hidden w-full mt-4 shadow">
       {tabs.map((tab, index) => (
         <button
           key={index}
-          className={`flex-1 py-2 px-4 text-sm ${
+          className={`flex-1 py-2 px-4 text-xs sm:text-sm ${
             activeTab === index
               ? 'text-blue-600 font-bold border-b-2 border-blue-600'
               : 'text-gray-600 border-b-2 border-gray-300'
@@ -22,9 +22,9 @@ const FilterTabs = ({ tabs, activeTab, onTabClick }) => {
 
 const SortByDropdown = ({ options, selectedOption, onOptionSelect }) => {
   return (
-    <div className="relative">
+    <div className="relative w-full sm:w-auto">
       <select
-        className="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded-lg shadow-sm leading-tight focus:outline-none focus:shadow-outline text-sm"
+        className="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded-lg shadow-sm leading-tight focus:outline-none focus:shadow-outline text-xs sm:text-sm"
         value={selectedOption}
         onChange={(e) => onOptionSelect(e.target.value)}
       >
@@ -48,16 +48,14 @@ const SearchResults = () => {
   return (
     <div className="p-3 max-w-4xl mx-auto">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
-        <div className="text-xl font-bold text-start sm:text-left mb-4 sm:mb-0">
+        <div className="text-lg sm:text-xl font-bold text-start sm:text-left mb-4 sm:mb-0">
           Melbourne: 2,582 search results found
         </div>
-        <div className="w-full sm:w-auto">
-          <SortByDropdown 
-            options={sortOptions} 
-            selectedOption={selectedOption} 
-            onOptionSelect={setSelectedOption} 
-          />
-        </div>
+        <SortByDropdown 
+          options={sortOptions} 
+          selectedOption={selectedOption} 
+          onOptionSelect={setSelectedOption} 
+        />
       </div>
       <FilterTabs 
         tabs={tabs} 
@@ -68,5 +66,6 @@ const SearchResults = () => {
     </div>
   );
 };
+
 
 export default SearchResults;
