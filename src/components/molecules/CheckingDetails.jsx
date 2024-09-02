@@ -15,11 +15,6 @@ export default function Checking() {
             Lakeside Motel Waterfront
           </h5>
           <div className="rating flex items-center">
-            <img src={Star} alt="Star" className="h-4 w-4"/>
-            <img src={Star} alt="Star" className="h-4 w-4"/>
-            <img src={Star} alt="Star" className="h-4 w-4"/>
-            <img src={Star} alt="Star" className="h-4 w-4"/>
-            <img src={halfStar} alt="Half Star" className="h-4 w-4"/>
             <p className="ml-2 text-sm font-medium text-gray-600">
               4.5 (1200 Reviews)
             </p>

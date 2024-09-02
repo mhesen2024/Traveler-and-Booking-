@@ -2,6 +2,7 @@ import Sidebar from "../components/organisem/Sidebar";
 import ResultSearch from "../components/molecules/ResultSearch";
 import Footer from "../components/organisem/Footer";
 import FilterTab from "../components/organisem/FilterTab";
+import FormSearch from "../components/molecules/FormSearch";
 
 
 export default function Discover() {
@@ -15,7 +16,7 @@ export default function Discover() {
         </div>
         <div className="right-column w-full md:w-2/3 space-y-4 mt-[80px]">
         <FilterTab/>
-          <ResultSearch />
+        <ResultSearch />
            
         </div>
       </div>

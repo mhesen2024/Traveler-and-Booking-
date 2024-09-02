@@ -39,7 +39,7 @@ const {countries} = useContext(CountryContext)
       >
         {countries.map((countries) => (
           <SwiperSlide key={countries.id}>
-            <CountryCard  countries={countries} />
+            <CountryCard  countries={countries}  />
           </SwiperSlide>
         ))}
       </Swiper>

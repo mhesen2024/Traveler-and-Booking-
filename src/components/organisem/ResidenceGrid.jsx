@@ -7,15 +7,15 @@ import { useContext } from "react";
 import { CountryContext } from "../../views/Home";
 
 
-const CityGrid = () => {
-  const { cites} = useContext(CountryContext);
+const ResidenceGrid = () => {
+  const { residence} = useContext(CountryContext);
 
   
   
   return (
     <div className="text-start pt-8 w-11/12 mx-auto mb-[40px] mt-[12px]">
   
-      <h2 className="text-3xl font-bold mb-4"> City </h2>
+      <h2 className="text-3xl font-bold mb-4"> Residence </h2>
    
       <Swiper
         spaceBetween={20}
@@ -39,9 +39,9 @@ const CityGrid = () => {
         modules={[Navigation]}
         className="mySwiper"
       >
-        {cites.map((city, index) => (
+        {residence.map((residence, index) => (
           <SwiperSlide key={index}>
-            <HotelCard city={city} />
+            <HotelCard residence={residence} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -49,4 +49,4 @@ const CityGrid = () => {
   );
 };
 
-export default CityGrid;
+export default ResidenceGrid;

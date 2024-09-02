@@ -59,7 +59,7 @@ export default function RoomForm() {
     }, []);
 
     return (
-        <div className="flex justify-center items-center min-h-screen mt-3">
+        <div className="flex justify-center items-center min-h-screen mt-3 ">
             <Formik
                 initialValues={{
                     AdultsCapacity: "",
@@ -97,8 +97,8 @@ export default function RoomForm() {
                     setFieldValue,
                     isSubmitting
                 }) => (
-                    <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
-                        <h2 className="text-2xl font-bold text-gray-700 mb-6">Room Form</h2>
+                    <form onSubmit={handleSubmit} className="container mx-auto my-[30px] p-4 w-1/3 border rounded-md shadow-lg ">
+                        <h2 className="text-center p-4 text-[27px]">Room Form</h2>
 
                         {/* Fields go here, with error handling */}
                         <div className="mb-4">

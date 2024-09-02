@@ -95,7 +95,7 @@ export default function ResidenceForm() {
   });
 
   return (
-    <div className="container mx-auto my-[30px] p-4 w-5/12">
+    <div className="container mx-auto my-[30px] p-4 w-1/3 border rounded-md shadow-lg ">
       <Formik
         initialValues={{
           Name: "",

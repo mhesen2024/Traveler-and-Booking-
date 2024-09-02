@@ -1,183 +1,62 @@
-import React from 'react';
-import HotelImage from '../../asserts/PNG/Hotel.png'; 
-import Star from '../../asserts/PNG/star.png'; 
-import HalfStar from '../../asserts/PNG/halfstar.png';
-import Julia from '../../asserts/PNG/Julia.png';
-import Marinerford from '../../asserts/PNG/Marinerford.png';
-import AghnimScepter from '../../asserts/PNG/Aghnim Scepter.png';
-import ShanghaiOpen from '../../asserts/PNG/Shanghai Open.png';
-import OceanWavesResort from '../../asserts/PNG/Ocean Waves Resort.png';
-import MaimiCityfrontier from '../../asserts/PNG/Maimi City frontier.png';
-import LakesideMotelWarefront from '../../asserts/PNG/Lakeside Motel Warefront.png'; 
+import React, { useEffect, useState } from 'react';
+import { getRoom } from '../../API/endpoint/room';
 
+export default function ResultSearch() {
+  const [allRoom, setAllRoom] = useState([]);
+  const [room, setRoom] = useState([]);
+  const [residence, setResidence] = useState(localStorage.getItem('residence') || '');
 
+  const getAllRoom = async () => {
+    try {
+      const response = await getRoom();
+      setAllRoom(response.data.data || []);
+    } catch (error) {
+      console.error('Error 404, please reload the page');
+    }
+  };
 
+  const filterRoom = () => {
+    if (!residence) return;
+    const roomFilteredByRes = allRoom.filter((room) => room.residenceId === residence);
+    setRoom(roomFilteredByRes);
+  };
 
-const HotelCard = ({ hotel }) => {
+  useEffect(() => {
+    getAllRoom();
+  }, []);
+
+  useEffect(() => {
+    filterRoom();
+  }, [allRoom, residence]);
+
   return (
-    <div className="flex bg-white shadow-md rounded-md overflow-hidden w-full max-w-4xl border border-gray-200 mt-[20px]">
-      {/* Left: Hotel Image */}
-      <img src={hotel.image} alt="Hotel" className="w-1/3 object-cover" />
-      
-      {/* Right: Details */}
-      <div className="flex-1 p-4">
-        <div className="flex justify-between items-start">
-          <div>
-            <h2 className="text-lg font-semibold">{hotel.name}</h2>
-            <div className="flex items-center mt-2">
-              {[...Array(Math.floor(hotel.rating))].map((_, i) => (
-                <img src={Star} alt="Star" className="h-4 w-4" key={i} />
-              ))}
-              {hotel.rating % 1 !== 0 && <img src={HalfStar} alt="Half Star" className="h-4 w-4" />}
-              <span className="ml-2 text-sm text-gray-600">{hotel.rating} ({hotel.reviews} Reviews)</span>
+    <div>
+      {room.length > 0 ? (
+        room.map((room) => (
+          <div key={room.id} className='flex gap-[24px] p-5 border rounded-md relative'>
+            <div className='relative w-[285px] h-[200px] object-cover rounded-md overflow-hidden'>
+              <img src={room.imageUrl} className='absolute w-full h-full' alt={room.residence || 'Room'} />
             </div>
-            <p className="text-sm text-gray-600 mt-2">
-              {hotel.description}
-            </p>
-          </div>
-          {hotel.discount && (
-            <div className="flex flex-col items-end">
-              <button className="bg-red-500 text-white text-sm px-4 py-2 rounded-md mb-2">
-                {hotel.discountText}
-              </button>
-              <div className="flex items-center text-green-600 text-sm">
-                <span>{hotel.discount}% off</span>
+            <div className='grow'>
+              <h1 className='text-[20px] roboto-medium mb-2'>{room.residence}</h1>
+              <p className='text-[13px] mb-[17px]'>Rating {room.rating}/5</p>
+              <p className='text-[13px] w-[380px] mb-[7px] truncate '>{room.description}</p>
+              <p className='text-[11px] mb-[2px]'>Adults Capacity: {room.adultsCapacity}</p>
+              <p className='text-[11px] mb-[10px]'>Children Capacity: {room.childrenCapacity}</p>
+              <div className='flex justify-between'>
+                <button className='text-[15px] bg-[#2F80ED] hover:bg-[#2870ce] rounded-md h-[40px] w-[140px] text-white'>
+                  See availability
+                </button>
+                <div>
+                  <span className='text-[20px] roboto-medium'>${room.pricePerNight}</span>
+                </div>
               </div>
             </div>
-          )}
-        </div>
-        
-        {/* See Availability Button */}
-        <div className="flex justify-between items-center mt-4">
-          <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded-md">
-            See availability
-          </button>
-          
-          {/* Pricing Section */}
-          <div className="text-right">
-            <p className="text-sm text-gray-600">{hotel.roomInfo}</p>
-            {hotel.oldPrice && (
-              <p className="text-xs text-gray-500 line-through">{hotel.oldPrice}</p>
-            )}
-            <p className="text-xl font-bold text-gray-900">{hotel.newPrice}</p>
-            <p className="text-xs text-gray-500">Includes taxes and fees</p>
           </div>
-        </div>
-      </div>
-    </div>
-    
-  );
-};
-
-const ResultSearch = () => {
-  const hotels = [
-    {
-      image: HotelImage,
-      name: "Lakeside Motel Warefront",
-      rating: 4.5,
-      reviews: 1200,
-      description: "Live a little and celebrate with champagne. Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies.",
-      oldPrice: "$150",
-      newPrice: "$130",
-      roomInfo: "1 room 2 days",
-      discount: 5,
-      discountText: "Book now and receive 15% off"
-    },
-    {
-      image: Julia,
-      name: "Julia Dens Resort",
-      rating: 4.5,
-      reviews: 1200,
-      description: "Live a little and celebrate with champagne. Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies.",
-      oldPrice: null,
-      newPrice: "$240",
-      roomInfo: "1 room 2 days",
-      discount: null,
-      discountText: ""
-    },
-   
-    {
-      image: AghnimScepter,
-      name: "Aghnim Scepter Hotel",
-      rating: 4.5,
-      reviews: 1200,
-      description: "Live a little and celebrate with champagne. Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies.",
-      oldPrice: null,
-      newPrice: "$300",
-      roomInfo: "1 room 2 days",
-      discount: 30,
-      discountText: "Receive 30% discount on a restaurant"
-    },
-    {
-      image: Marinerford ,
-      name: "Marinerford Hotel",
-      rating: 4.5,
-      reviews: 1200,
-      description: "Live a little and celebrate with champagne. Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies.",
-      oldPrice: null,
-      newPrice: "$120",
-      roomInfo: "1 room 2 days",
-      discount: null,
-      discountText: ""
-    },
-    {
-      image: ShanghaiOpen ,
-      name: "Shanghai Open House",
-      rating: 4.5,
-      reviews: 1200,
-      description: "Live a little and celebrate with champagne. Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies.",
-      oldPrice: null,
-      newPrice: "$145",
-      roomInfo: "1 room 2 days",
-      discount: null,
-      discountText: ""
-    },
-    {
-      image: OceanWavesResort,
-      name: "Ocean Waves Resort",
-      rating: 4.5,
-      reviews: 1200,
-      description: "Live a little and celebrate with champagne. Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies.",
-      oldPrice: null,
-      newPrice: "$310",
-      roomInfo: "1 room 2 days",
-      discount: null,
-      discountText: ""
-    },
-    {
-      image: MaimiCityfrontier,
-      name: "Malimi City Frontier",
-      rating: 4.5,
-      reviews: 1200,
-      description: "Live a little and celebrate with champagne. Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies.",
-      oldPrice: null,
-      newPrice: "$190",
-      roomInfo: "1 room 2 days",
-      discount: 15,
-      discountText: "Receive 30% discount on a restaurant"
-    },
-    {
-      image: LakesideMotelWarefront,
-      name: "Lakeside Motel Warefront",
-      rating: 4.5,
-      reviews: 1200,
-      description: "Live a little and celebrate with champagne. Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies.",
-      oldPrice: "320$",
-      newPrice: "300$",
-      roomInfo: "1 room 2 days",
-      discount: null,
-      
-    },
-    
-  ];
-
-  return (
-    <div className="flex flex-col items-center">
-      {hotels.map((hotel, index) => (
-        <HotelCard hotel={hotel} key={index} />
-      ))}
+        ))
+      ) : (
+        <p className='text-[18px] text-center p-5'>No rooms available in this location.</p>
+      )}
     </div>
   );
-};
-
-export default ResultSearch;
+}
