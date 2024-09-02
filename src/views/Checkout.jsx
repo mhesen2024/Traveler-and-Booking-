@@ -7,22 +7,28 @@ import ImpInformation from "../components/molecules/ImpInformation";
 
 const CheckOut = () => {
   return (
-    <>
-      
-      <div className="booking-page flex flex-col md:flex-row gap-4 my-6 ">
-        <div className="left-column flex-1 space-y-4 ">
-        <h1 className="text-xl font-semibold mx-[175px] ">Secure your reservation</h1>
+    <div className="px-4 py-6 lg:px-8">
+      <div className="booking-page flex flex-col lg:flex-row gap-6 lg:gap-8 my-6">
+        {/* Left Column */}
+        <div className="left-column w-full lg:flex-1 space-y-6">
+          <h1 className="text-lg sm:text-xl font-semibold text-center lg:text-left">
+            Secure your reservation
+          </h1>
           <UserInfo />
           <PaymentOptions />
           <ImpInformation />
         </div>
-        <div className="right-column w-full md:w-1/3 space-y-4">
+        
+        {/* Right Column */}
+        <div className="right-column w-full lg:w-1/3 space-y-6 mt-6 lg:mt-0">
           <Checking />
           <PriceDetails />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default CheckOut;
+
+
