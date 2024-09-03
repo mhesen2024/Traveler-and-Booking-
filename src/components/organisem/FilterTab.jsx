@@ -48,9 +48,6 @@ const SearchResults = () => {
   return (
     <div className="p-3 max-w-4xl mx-auto">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
-        <div className="text-lg sm:text-xl font-bold text-start sm:text-left mb-4 sm:mb-0">
-          Melbourne: 2,582 search results found
-        </div>
         <SortByDropdown 
           options={sortOptions} 
           selectedOption={selectedOption} 
@@ -62,7 +59,6 @@ const SearchResults = () => {
         activeTab={activeTab} 
         onTabClick={setActiveTab} 
       />
-      {/* Content related to the selected tab goes here */}
     </div>
   );
 };

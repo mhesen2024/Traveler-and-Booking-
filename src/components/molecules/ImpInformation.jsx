@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ImpInformation() {
   return (
-    <div className="xl:w-4/6 mx-auto   rounded-md my-[180px]  overflow-hidden mb-9">
+    <div className="xl:w-4/6 mx-auto   rounded-md my-[180px]  overflow-hidden mb-9 border pb-3">
       <h1 className="mb-[32px] py-5 px-6 bg-[#F2C94C] roboto-medium text-[18px]">
         Important information about your booking
       </h1>

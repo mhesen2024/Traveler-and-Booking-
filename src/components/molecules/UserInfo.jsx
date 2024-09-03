@@ -22,12 +22,12 @@ export default function UserInfo() {
     };
 
     return (
-        <div className="xl:w-4/6 mx-auto   rounded-md my-[30px]  overflow-hidden mb-9">
-                    <h3 className="text-xl font-semibold mb-4 text-white bg-blue-500 p-4 rounded-lg">
+        <div className="xl:w-4/6 mx-auto   rounded-md my-[30px]  overflow-hidden mb-9 border ">
+                    <h3 className="text-xl font-semibold mb-4 text-white bg-blue-500 p-4  px-3">
                         Room 1 2 adults, 1 double bed and 1 twin bed, Non-smoking
                     </h3>
                     <form onSubmit={handleSubmit}>
-                        <div className="mb-4 flex space-x-4">
+                        <div className="mb-4 flex space-x-4 px-3">
                             <div className="w-2/6">
                                 <label htmlFor="first-name" className="block text-gray-700">
                                     First name
@@ -55,7 +55,7 @@ export default function UserInfo() {
                                 />
                             </div>
                         </div>
-                        <div className="mb-4 w-2/6">
+                        <div className="mb-4 w-2/6 ml-3">
                             <label htmlFor="mobile-number" className="block text-gray-700">
                                 Mobile number
                             </label>
@@ -68,7 +68,7 @@ export default function UserInfo() {
                                 className="mt-1 p-2 block w-full bg-gray-200 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-4 ml-3">
                             <label className="inline-flex items-center">
                                 <input
                                     type="checkbox"
@@ -84,7 +84,7 @@ export default function UserInfo() {
                         </div>
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600"
+                            className="w-full bg-blue-500 text-white p-3  hover:bg-blue-600"
                         >
                             Submit
                         </button>

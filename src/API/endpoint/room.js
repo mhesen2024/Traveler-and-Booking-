@@ -12,3 +12,7 @@ export const addRoom =async (body)=>{
         timeout: 20000,   
     });
 }
+
+export const roomDetails = async (id) => {
+    return await axiosInstance.get(`Room/Details/${id}`);
+  };

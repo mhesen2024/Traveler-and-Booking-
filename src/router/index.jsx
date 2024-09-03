@@ -58,6 +58,10 @@ const router = createBrowserRouter([
         element: <Contact />
       },
       {
+        path: 'discover/:id',
+        element: <Discover />
+      },
+      {
         path: 'discover',
         element: <Discover />
       },
@@ -70,7 +74,7 @@ const router = createBrowserRouter([
         element: <Profile />
       },
       {
-        path: 'Checkout',
+        path: 'Checkout/:id',
         element: <CheckOut />
       },
     ]

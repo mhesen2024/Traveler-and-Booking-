@@ -34,73 +34,75 @@ export default function PaymentOptions() {
   };
 
   return (
-    <div className="xl:w-4/6 mx-auto   rounded-md my-[180px]  overflow-hidden mb-9">
-          <h3 className="text-xl font-semibold mb-4 text-white bg-blue-500 p-4 rounded-lg">
+    <div className="xl:w-4/6 mx-auto   rounded-md my-[180px]  overflow-hidden mb-9 border">
+          <h3 className="text-xl font-semibold mb-4 text-white bg-blue-500 p-4 ">
             Payment options
           </h3>
+
           <div className="mb-4 flex flex-wrap gap-4 sm:gap-2 lg:gap-4 xl:gap-6">
             <button
               onClick={() => handlePaymentMethodClick('debit')}
               className={`${
                 paymentMethod === 'debit'
-                  ? 'text-blue-500 border-b-2 border-blue-500'
-                  : 'text-gray-700'
+                ? 'text-blue-500 border-b-2 border-blue-500'
+                : 'text-gray-700'
               } px-4 py-2 text-sm md:text-base lg:text-lg xl:text-lg`}
-            >
+              >
               Debit/Credit Card
             </button>
             <button
               onClick={() => handlePaymentMethodClick('paypal')}
               className={`${
                 paymentMethod === 'paypal'
-                  ? 'text-blue-500 border-b-2 border-blue-500'
-                  : 'text-gray-700'
+                ? 'text-blue-500 border-b-2 border-blue-500'
+                : 'text-gray-700'
               } px-4 py-2 text-sm md:text-base lg:text-lg xl:text-lg`}
-            >
+              >
               PayPal
             </button>
             <button
               onClick={() => handlePaymentMethodClick('bank')}
               className={`${
                 paymentMethod === 'bank'
-                  ? 'text-blue-500 border-b-2 border-blue-500'
-                  : 'text-gray-700'
+                ? 'text-blue-500 border-b-2 border-blue-500'
+                : 'text-gray-700'
               } px-4 py-2 text-sm md:text-base lg:text-lg xl:text-lg`}
-            >
+              >
               Bank Transfer
             </button>
           </div>
 
           {paymentMethod === 'debit' && (
             <form onSubmit={handleSubmit}>
+              <div className='ml-3'>
               <div className="mb-4 flex space-x-4">
                 <a href="#visa" className="block">
                   <img
                     src={visa}
                     alt="Visa"
                     className="h-10 w-20 object-contain bg-gray-200 p-2 rounded-md"
-                  />
+                    />
                 </a>
                 <a href="#mastercard" className="block">
                   <img
                     src={mastercard}
                     alt="Mastercard"
                     className="h-10 w-20 object-contain bg-gray-200 p-2 rounded-md"
-                  />
+                    />
                 </a>
                 <a href="#express" className="block">
                   <img
                     src={express}
                     alt="American Express"
                     className="h-10 w-20 object-contain bg-gray-200 p-2 rounded-md"
-                  />
+                    />
                 </a>
                 <a href="#discover" className="block">
                   <img
                     src={discover}
                     alt="Discover"
                     className="h-10 w-20 object-contain bg-gray-200 p-2 rounded-md"
-                  />
+                    />
                 </a>
               </div>
               <div className="mb-4 w-3/4">
@@ -114,7 +116,7 @@ export default function PaymentOptions() {
                   value={formData.nameOnCard}
                   onChange={handleChange}
                   className="mt-1 p-2 block w-full bg-gray-200 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
+                  />
               </div>
               <div className="mb-4 w-3/4">
                 <label htmlFor="card-number" className="block text-gray-700">
@@ -127,7 +129,7 @@ export default function PaymentOptions() {
                   value={formData.cardNumber}
                   onChange={handleChange}
                   className="mt-1 p-2 block w-full bg-gray-200 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
+                  />
               </div>
               <div className="mb-4 flex space-x-4">
                 <div className="w-1/2">
@@ -141,7 +143,7 @@ export default function PaymentOptions() {
                       value={formData.expirationMonth}
                       onChange={handleChange}
                       className="mt-1 p-2 block w-full bg-gray-200 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    >
+                      >
                       <option value="" disabled>
                         Month
                       </option>
@@ -157,7 +159,7 @@ export default function PaymentOptions() {
                       value={formData.expirationYear}
                       onChange={handleChange}
                       className="mt-1 p-2 block w-full bg-gray-200 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    >
+                      >
                       <option value="" disabled>
                         Year
                       </option>
@@ -180,7 +182,7 @@ export default function PaymentOptions() {
                     value={formData.securityCode}
                     onChange={handleChange}
                     className="mt-1 p-2 block w-full bg-gray-200 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
+                    />
                 </div>
               </div>
               <div className="mb-4 w-3/4">
@@ -194,12 +196,13 @@ export default function PaymentOptions() {
                   value={formData.billingZipCode}
                   onChange={handleChange}
                   className="mt-1 p-2 block w-full bg-gray-200 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
+                  />
+              </div>
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600"
-              >
+                className="w-full bg-blue-500 text-white p-3  hover:bg-blue-600"
+                >
                 Submit Payment
               </button>
             </form>

@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CountryContext } from "../../views/Home";
 import { useNavigate } from "react-router";
+import { getCountry } from "../../API/endpoint/country";
+import { getResidence } from "../../API/endpoint/Residence";
+import { getCity } from "../../API/endpoint/city";
 
 export default function FormSearch() {
   const [country, setCountry] = useState("");
@@ -8,14 +11,42 @@ export default function FormSearch() {
   const [city, setCity] = useState("");
   const [residenceByCity, setresidenceByCity] = useState([]);
   const [res , setRes] = useState('');
-  const { residence, countries, cites } = useContext(CountryContext);
-
+  const [cites,setcites] = useState([])
+  const [countries,setcountries] = useState([])
+  const [residence,setresidence] = useState([])
   const navigate = useNavigate('');
-  const handleResidenceChange = (e) => {
-    const selectedResidence = e.target.value;
-    setRes(selectedResidence);
+
+  const getCountryData = async () => {
+    try {
+      const response = await getCountry();
+      setcountries(response.data.data);
+    } catch {
+      console.error("");
+    }
+  };
+  const getResidenceData = async () => {
+    try {
+      const response = await getResidence();
+      setresidence(response.data.data);
+    } catch {
+      console.error("");
+    }
+  };
+  const getCityData = async () => {
+    try {
+      const response = await getCity();
+      setcites(response.data.data);
+    } catch (e) {
+      console.error("");
+    }
   };
 
+
+  useEffect(() => {
+    getCountryData();
+    getCityData();
+    getResidenceData()
+  }, []);
   useEffect(() => {
     if (country) {
       const filterCity = cites.filter((city) => city.country === country);
@@ -26,7 +57,6 @@ export default function FormSearch() {
   }, [country, cites]);
 
   useEffect(() => {
-    console.log(city);
 
     if (city) {
       const filteredResidence = residence.filter((res) => res.city === city);
@@ -84,7 +114,6 @@ export default function FormSearch() {
           disabled={!city}
           onChange={(e) => {
             setRes(e.target.value);
-            localStorage.setItem('residence' ,e.target.value )
           }}
         >
           <option hidden>Residence</option>
@@ -107,7 +136,7 @@ export default function FormSearch() {
         disabled={!country || !city || !res}
         type="submit"
         onClick={()=>{
-          navigate('Discover');
+          navigate(`/Discover/${res}`);
         }}
       >
         Search

@@ -54,7 +54,7 @@ export default function Home() {
   useEffect(() => {
     getCountryData();
     getCityData();
-    getResidenceType();
+    // getResidenceType();
     getResidenceData()
   }, []);
 
