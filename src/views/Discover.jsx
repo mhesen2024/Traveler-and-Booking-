@@ -7,25 +7,33 @@ import { useEffect, useState } from "react";
 import { getRoom } from "../API/endpoint/room";
 import { useParams } from "react-router";
 
-
 export default function Discover() {
   const [allRoom, setAllRoom] = useState([]);
   const [room, setRoom] = useState([]);
-  const {id} = useParams();
-  const [residence,setresidence]=useState(id);
+  const { id } = useParams();
+  const [residence, setResidence] = useState(id);
+  const [toggle, setToggle] = useState(false);
+
+  const handleToggle = () => {
+    setToggle(!toggle);
+    console.log(toggle);
+    
+  };
 
   const getAllRoom = async () => {
     try {
       const response = await getRoom();
       setAllRoom(response.data.data || []);
     } catch (error) {
-      console.error('Error 404, please reload the page');
+      console.error("Error 404, please reload the page");
     }
   };
 
   const filterRoom = () => {
     if (!residence) return;
-    const roomFilteredByRes = allRoom.filter((room) => room.residenceId === residence);
+    const roomFilteredByRes = allRoom.filter(
+      (room) => room.residenceId === residence
+    );
     setRoom(roomFilteredByRes);
   };
 
@@ -41,23 +49,25 @@ export default function Discover() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", 
+      behavior: "smooth"
     });
   };
+
   return (
     <>
-      <div className="w-full h-[250px] gap-0 opacity-100 bg-gradient-to-b from-[#2969BF] to-[#144E9D] relative">
-      <div className='absolute sm:-bottom-10 -bottom-14 w-full'>
-      <FormSearch/>
-     </div>
-      </div>
-      <div className="flex flex-col md:flex-row mt-[50px] gap-[100px]">
-        <div className="  space-y-4">
-          <Sidebar />
+      <div className="h-[250px] gap-0 opacity-100 bg-gradient-to-b from-[#2969BF] to-[#144E9D] relative">
+        <div className="absolute sm:-bottom-10 -bottom-14 w-full">
+          <FormSearch />
         </div>
-        <div className="right-column w-full md:w-2/3 space-y-4">
-        <FilterTab/>
-        <ResultSearch room={room} allRoom={allRoom} residence={residence} />
+      </div>
+
+      <div className="flex mt-[50px] xl:gap-[80px] md:gap-[10px] sm:gap-0">
+        <div className="space-y-4">
+          <Sidebar toggle={toggle} handleToggle={handleToggle} />
+        </div>
+        <div className="w-full xl:w-2/3 mx-auto">
+          <FilterTab />
+          <ResultSearch room={room} allRoom={allRoom} residence={residence} />
         </div>
       </div>
       <Footer />

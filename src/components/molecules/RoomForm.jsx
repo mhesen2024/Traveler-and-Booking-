@@ -97,7 +97,7 @@ export default function RoomForm() {
                     setFieldValue,
                     isSubmitting
                 }) => (
-                    <form onSubmit={handleSubmit} className="container mx-auto my-[30px] p-4 w-1/3 border rounded-md shadow-lg ">
+                    <form onSubmit={handleSubmit} className="container mx-auto my-[30px] p-4 xl:w-1/3 border rounded-md shadow-lg ">
                         <h2 className="text-center p-4 text-[27px]">Room Form</h2>
 
                         {/* Fields go here, with error handling */}

@@ -1,53 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import Search from '../molecules/Search';
-import Price from '../molecules/Price';
-import Rating from '../molecules/Rating';
-import Category from '../molecules/Category';
-import Activities from '../molecules/Activities';
+import React from "react";
+import Price from "../molecules/Price";
+import Rating from "../molecules/Rating";
 
-export default function Sidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    if (isSidebarOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isSidebarOpen]);
-
+export default function Sidebar({ toggle, handleToggle }) {
   return (
-    <div className="relative">
-      <button
-        className="sm:hidden px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md"
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+    <>
+      <div
+        className={`fixed bottom-16 left-0 p-3 z-10 rounded-tr-md rounded-br-md bg-blue-500 ${
+          toggle ? "hidden" : "block"
+        } laptop:hidden`}
+        onClick={handleToggle}
       >
-        Filters +
-      </button>
-
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black opacity-50 z-30 sm:hidden"
-          onClick={() => setIsSidebarOpen(false)}
-        />
-      )}
+        <i className="fa-solid fa-filter fa-xl text-white"></i>
+      </div>
 
       <div
-        className={`fixed inset-y-0 left-5 transform bg-white w-64 transition-transform duration-300  z-40 overflow-y-auto ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } sm:relative sm:translate-x-0 sm:w-72`}
+        className={`laptop:block tablet:hidden hidden ml-4 mt-16 ${
+          toggle ? "block" : "hidden"
+        }`}
       >
-        <div className="container flex flex-col space-y-4 sm:space-y-6 mt-12 sm:mt-16 md:mt-24 cursor-auto">
-        
-          <Price />
-          <Rating />
-          {/* <Category />
-          <Activities /> */}
-        </div>
+        <Price />
+        <Rating />
       </div>
-    </div>
+      {
+        window.innerWidth <950 ?
+(        <div
+        className={`fixed top-0 -left-10 bottom-0 z-10 bg-white  rounded-tr-md rounded-br-md  duration-500 ${
+          toggle ? 'tablet:w-[350px] w-[270px]  left-1' : 'tablet:w-0 w-0'
+          } p-4 mt-16`}
+          >
+        
+        <div className={`mt-10 relative ${
+          toggle ? 'tablet:block block' : 'tablet:opacity-0 opacity-0'
+        } duration-700`} >
+<i class="fa-solid fa-x absolute right-3 top-3"  onClick={handleToggle}></i>
+
+        <Price />
+        <Rating />
+        </div>
+      </div>):''
+}
+
+
+    </>
   );
 }

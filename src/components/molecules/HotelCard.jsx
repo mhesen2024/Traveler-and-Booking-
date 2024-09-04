@@ -21,7 +21,7 @@ export default function HotelCard({ residence }) {
       />
     </div>
     <div className="p-4 bg-white">
-      <h3 className="text-xl font-semibold text-gray-800">{residence.name}</h3>
+      <h3 className="text-xl font-semibold text-gray-800 truncate">{residence.name}</h3>
       <span className="text-sm text-gray-600">{residence.residenceType}</span>
     </div>
   </div>
