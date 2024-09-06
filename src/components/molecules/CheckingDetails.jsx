@@ -21,8 +21,8 @@ export default function Checking({room}) {
           <p>room number :{room.number}</p>
           <p className="leading-8 text-gray-600">Adults Capacity :{room.adultsCapacity}</p>
           <p className="leading-8 text-gray-600">Children Capacity :{room.childrenCapacity}</p>
-          <p className="leading-8 text-gray-600">Check in: Sunday, March 18, 2022</p>
-          <p className="leading-8 text-gray-600">Check out: Tuesday, March 20, 2022</p>
+          <p className="leading-8 text-gray-600">Check in: Sunday, March 18, 2025</p>
+          <p className="leading-8 text-gray-600">Check out: Tuesday, March 20, 2025</p>
         </div>
       </div>
     </div>

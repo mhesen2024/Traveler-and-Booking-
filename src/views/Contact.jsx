@@ -1,13 +1,29 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useRef } from 'react';
+import emailjs from 'emailjs-com';
 
-const ContactUs = () => {
-  const navigate = useNavigate(); 
+const Contact = () => {
+  const form = useRef();
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); 
-    
-    navigate('/desired-path'); 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_ngjcrf4', 
+        'template_36mhhgh', 
+        form.current,
+        'GioKnTKLRGtlsD-DI' 
+      )
+      .then(
+        (result) => {
+          alert('Message sent successfully!');
+          console.log(result.text);
+        },
+        (error) => {
+          alert('Failed to send message. Please try again.');
+          console.log(error.text);
+        }
+      );
   };
 
   return (
@@ -22,7 +38,8 @@ const ContactUs = () => {
         </h2>
       </div>
       <form
-        onSubmit={handleSubmit} // Add the onSubmit handler here
+        ref={form} // Reference to the form
+        onSubmit={sendEmail} // Call sendEmail on form submit
         className="mx-auto mt-16 max-w-xl sm:mt-20"
       >
         {/* Form Fields */}
@@ -100,7 +117,6 @@ const ContactUs = () => {
                   className="h-full rounded-md border-0 bg-transparent bg-none py-0 pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
                 >
                   <option>PS</option>
-                  
                 </select>
                 <svg
                   className="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
@@ -156,4 +172,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default Contact;
