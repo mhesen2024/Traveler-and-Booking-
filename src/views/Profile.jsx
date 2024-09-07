@@ -13,6 +13,7 @@ export default function Profile() {
   const [email, setEmail] = useState(dataUser.email );
   const [phoneNumber, setPhoneNumber] = useState(dataUser.phoneNumber || "123-456-7890");
   const [imgProf, setImgProf] = useState(dataUser.imageUrl || profilePic);
+  const [toggle , setToggle]= useState(false);
   const [image, setImage] = useState();
   const navigate = useNavigate();
 
@@ -41,9 +42,12 @@ export default function Profile() {
     formData.append('PhoneNumber', phoneNumber);
     try {
       const response = await updateProfile(formData);
+      console.log(response);
       
       if (response.status === 200) {
         toast.success('Profile updated successfully');
+       getUser();
+       window.location.reload();
       } else {
         toast.error('Failed to update profile');
       }
@@ -58,7 +62,7 @@ export default function Profile() {
       navigate("/");
     }
     getUser();
-  }, [dataUser.email, navigate]);
+  });
 
 
 
@@ -73,7 +77,7 @@ export default function Profile() {
           />
         </div>
         <div className="text-center md:text-left flex-1">
-          <h2 className="text-2xl md:text-3xl font-bold text-blue-500">
+          <h2 className="capitalize text-2xl md:text-3xl font-bold text-blue-500">
             {firstName} {lastName}
           </h2>
           <p className="text-sm text-gray-400 flex items-center justify-center md:justify-start mt-3">
@@ -101,13 +105,13 @@ export default function Profile() {
             id="profile-picture-upload"
             type="file"
             onChange={(event) => {
-              setImage(event.currentTarget.files[0]);        
+              setImage(event.currentTarget.files[0]);    
+              setToggle(true);    
             }}
             className="hidden"
             />
-      <button onClick={updateData}>
-        upload
-                 
+      <button onClick={()=>{updateData()}} className={`${toggle ? 'block':'hidden'}`} >
+        upload    
       </button>
         </div>
       </div>

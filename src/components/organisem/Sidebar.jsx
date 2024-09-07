@@ -23,10 +23,10 @@ export default function Sidebar({ toggle, handleToggle }) {
         <Rating />
       </div>
       {
-        window.innerWidth <950 ?
+        window.innerWidth <= 1020 ?
 (        <div
         className={`fixed top-0 -left-10 bottom-0 z-10 bg-white  rounded-tr-md rounded-br-md  duration-500 ${
-          toggle ? 'tablet:w-[350px] w-[270px]  left-1' : 'tablet:w-0 w-0'
+          toggle ? 'mobile:w-[50%]   left-1' : 'tablet:w-0 w-0'
           } p-4 mt-16`}
           >
         

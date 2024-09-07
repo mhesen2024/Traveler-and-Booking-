@@ -19,12 +19,12 @@ const ResidenceGrid = () => {
    
       <Swiper
         spaceBetween={20}
-        slidesPerView={4}
+        slidesPerView={1}
         navigation={true}
         breakpoints={{
-     
+    
           340: {
-            slidesPerView: 1
+            slidesPerView: 2
           },
           540: {
             slidesPerView: 2

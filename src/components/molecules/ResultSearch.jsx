@@ -88,7 +88,7 @@ export default function ResultSearch({ room, allRoom, residence }) {
     </span>
   }
   nextLabel={
-    <span className="flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700">
+    <span className="flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300  rounded-md text-gray-700">
       <span className="mr-2 hidden md:inline">Next</span>
       <i className="fa-solid fa-chevron-right"></i>
     </span>
@@ -101,8 +101,8 @@ export default function ResultSearch({ room, allRoom, residence }) {
   pageRangeDisplayed={5}
   onPageChange={handlePageClick}
   containerClassName="flex gap-2 flex-wrap"
-  pageClassName="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700 cursor-pointer"
-  activeClassName="bg-blue-500 text-white"
+  pageClassName="px-3 py-1 bg-gray-200 hover:bg-blue-300 rounded-md text-gray-700 cursor-pointer"
+  activeClassName="bg-blue-600 text-white"
   previousClassName="mr-2"
   nextClassName="ml-2"
   disabledClassName="opacity-50 cursor-not-allowed"
