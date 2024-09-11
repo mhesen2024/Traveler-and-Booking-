@@ -8,6 +8,6 @@ export const getProfile = async () => {
 
 export const updateProfile =async (body)=>{
     const userName = localStorage.getItem("userName") || '';
-    const response = await axiosInstance.put(`User/UpdateUserProfile/${userName}`,body );
+    const response =  axiosInstance.put(`User/UpdateUserProfile/${userName}`,body );
     return response ;
 }

@@ -12,15 +12,27 @@ export default function ResultSearch({ room, allRoom, residence }) {
 
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
+    scrollToTop();
+
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 70,
+      behavior: "smooth"
+    });
+  };
   useEffect(() => {
-    if (residence) {
+    if (residence && room) {
       setItems([...room]);
-    } else {
+    } else if (allRoom) {
       setItems([...allRoom]);
     }
   }, [room, allRoom, residence]);
+  
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [items]);
 
   const renderRoom = (room) => (
     <div
@@ -35,10 +47,16 @@ export default function ResultSearch({ room, allRoom, residence }) {
         />
       </div>
       <div className="flex flex-col grow">
-        <h1 className="text-sm sm:text-xl roboto-medium mb-2 capitalize">
+        <h1 className="text-sm sm:text-xl roboto-medium    capitalize">
           {room.residence}
         </h1>
-        <p className="text-sm sm:text-base mb-4">Rating {room.rating}/5</p>
+        <p className="text-sm sm:text-base mb-4">
+          {Array(room.rating)
+            .fill()
+            .map((index) => (
+              <i key={index} className="fa-solid fa-star text-yellow-400 fa-xs"></i>
+            ))}
+        </p>
         <p className="text-sm sm:text-base sm:w-[380px] mb-4 truncate">
           {room.description}
         </p>
@@ -77,38 +95,33 @@ export default function ResultSearch({ room, allRoom, residence }) {
         </p>
       )}
 
-
-      
-<ReactPaginate
-  className="flex flex-wrap justify-center items-center space-x-2 mt-8"
-  previousLabel={
-    <span className="flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700">
-      <i className="fa-solid fa-chevron-left"></i>
-      <span className="ml-2 hidden md:inline">Previous</span>
-    </span>
-  }
-  nextLabel={
-    <span className="flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300  rounded-md text-gray-700">
-      <span className="mr-2 hidden md:inline">Next</span>
-      <i className="fa-solid fa-chevron-right"></i>
-    </span>
-  }
-  breakLabel={
-    <span className="px-3 py-1 hidden md:inline">...</span>
-  }
-  pageCount={Math.ceil(items.length / itemsPerPage)}
-  marginPagesDisplayed={2}
-  pageRangeDisplayed={5}
-  onPageChange={handlePageClick}
-  containerClassName="flex gap-2 flex-wrap"
-  pageClassName="px-3 py-1 bg-gray-200 hover:bg-blue-300 rounded-md text-gray-700 cursor-pointer"
-  activeClassName="bg-blue-600 text-white"
-  previousClassName="mr-2"
-  nextClassName="ml-2"
-  disabledClassName="opacity-50 cursor-not-allowed"
-  breakClassName="cursor-default"
-/>
-
+      <ReactPaginate
+        className="flex flex-wrap justify-center items-center space-x-2 mt-8"
+        previousLabel={
+          <span className="flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700">
+            <i className="fa-solid fa-chevron-left"></i>
+            <span className="ml-2 hidden md:inline">Previous</span>
+          </span>
+        }
+        nextLabel={
+          <span className="flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300  rounded-md text-gray-700">
+            <span className="mr-2 hidden md:inline">Next</span>
+            <i className="fa-solid fa-chevron-right"></i>
+          </span>
+        }
+        breakLabel={<span className="px-3 py-1 hidden md:inline">...</span>}
+        pageCount={Math.ceil(items.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName="flex gap-2 flex-wrap"
+        pageClassName="px-3 py-1  hover:bg-blue-300 rounded-md text-gray-700 cursor-pointer"
+        activeClassName="bg-blue-500 text-white"
+        previousClassName="mr-2"
+        nextClassName="ml-2"
+        disabledClassName="opacity-50 cursor-not-allowed"
+        breakClassName="cursor-default"
+      />
     </div>
   );
 }

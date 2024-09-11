@@ -41,13 +41,13 @@ export default function Profile() {
     formData.append('Image', image);
     formData.append('PhoneNumber', phoneNumber);
     try {
-      const response = await updateProfile(formData);
-      console.log(response);
-      
+      const response = await updateProfile(formData);      
       if (response.status === 200) {
         toast.success('Profile updated successfully');
-       getUser();
-       window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+        getUser();
       } else {
         toast.error('Failed to update profile');
       }
@@ -69,12 +69,15 @@ export default function Profile() {
   return (
     <div className="bg-gray-900 p-8 text-white rounded-lg mt-[100px] shadow-lg mx-auto max-w-full lg:max-w-5xl">
       <div className="flex flex-col md:flex-row items-center">
-        <div className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] xl:w-[250px] xl:h-[250px] xl:mx-16 mb-4 md:mb-0 md:mr-8">
+        <div className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] xl:w-[250px] xl:h-[250px] xl:mx-16 mb-4 md:mb-0 md:mr-8">
           <img
             src={imgProf}
             alt="Profile"
             className="w-full h-full object-cover"
           />
+       <label htmlFor="profile-picture-upload" className="absolute -right-3 -bottom-3  w-[50px] h-[50px] group rounded-full bg-white text-center hover:bg-blue-500 cursor-pointer">
+       <i class="fa-solid fa-camera-retro leading-[50px] text-black group-hover:text-white"></i>
+       </label>
         </div>
         <div className="text-center md:text-left flex-1">
           <h2 className="capitalize text-2xl md:text-3xl font-bold text-blue-500">
@@ -95,12 +98,12 @@ export default function Profile() {
           <Logo />
         </Link>
         <div>
-          <label
-            htmlFor="profile-picture-upload"
-            className="cursor-pointer text-blue-400 hover:text-blue-600 flex items-center justify-center md:justify-start transition duration-300"
+          <p
+            onClick={()=>{updateData()}}
+            className={`${toggle ? 'block':'hidden'} cursor-pointer text-blue-400 hover:text-blue-600 flex items-center justify-center md:justify-start transition duration-300`}
           >
             <i className="fa-solid fa-upload mr-2"></i> Upload Picture
-          </label>
+          </p>
           <input
             id="profile-picture-upload"
             type="file"
@@ -110,9 +113,7 @@ export default function Profile() {
             }}
             className="hidden"
             />
-      <button onClick={()=>{updateData()}} className={`${toggle ? 'block':'hidden'}`} >
-        upload    
-      </button>
+
         </div>
       </div>
       <Toaster />

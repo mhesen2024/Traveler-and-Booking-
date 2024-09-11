@@ -13,7 +13,11 @@ export default function Checking({room}) {
           </h5>
           <div className="rating flex items-center">
             <p className=" text-sm font-medium text-gray-600">
-              Raiting :{room.rating}/5
+            {Array(room.rating)
+            .fill()
+            .map((index) => (
+              <i key={index} className="fa-solid fa-star text-yellow-400 fa-xs"></i>
+            ))}
             </p>
           </div>
         </a>
