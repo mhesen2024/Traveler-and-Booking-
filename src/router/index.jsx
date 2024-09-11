@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import About from '../views/About';
 import Home from '../views/Home';
-import Activities from '../views/add';
 import Contact from '../views/Contact';
 import Discover from '../views/Discover';
 import RootLayout from '../views/Layout';
@@ -19,75 +18,30 @@ import RoomForm from '../components/molecules/RoomForm';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: <RootLayout />, 
     children: [
-      {
-        index: true,
-        element: <Home/>
+      { path: '/', element: <Home />, index: true },
+      { path: 'about', element: <About /> },
+      { 
+        path: 'add', 
+        element: <Add />, 
+        children: [
+          { path: 'add-country', element: <CountryForm /> },
+          { path: 'add-room', element: <RoomForm /> },
+          { path: 'add-city', element: <CityForm /> },
+          { path: 'ResidanceForm', element: <ResidanceForm /> },
+        ] 
       },
-      {
-        path: 'about',
-        element: <About />
-      },
-      {
-        path: 'add',
-        element: <Add />,
-        children:[
-          {
-          path: 'add-country',
-          element: <CountryForm />
-        },
-          {
-          path: 'add-room',
-          element: <RoomForm />
-        },
-        {
-          path: 'add-city',
-          element: <CityForm />
-        },
-        {
-          path: 'ResidanceForm',
-          element: <ResidanceForm />
-        },
-      ]
-
-        
-      },
-      {
-        path: 'contact',
-        element: <Contact />
-      },
-      {
-        path: 'discover/:id',
-        element: <Discover />
-      },
-      {
-        path: 'discover',
-        element: <Discover />
-      },
-      {
-        path: '*',
-        element: <NotFound />
-      },
-      {
-        path: 'Profile',
-        element: <Profile />
-      },
-      {
-        path: 'Checkout/:id',
-        element: <CheckOut />
-      },
+      { path: 'contact', element: <Contact /> },
+      { path: 'discover/:id', element: <Discover /> },
+      { path: 'discover', element: <Discover /> },
+      { path: '*', element: <NotFound /> },
+      { path: 'Profile', element: <Profile /> },
+      { path: 'Checkout/:id', element: <CheckOut /> },
     ]
   },
-  {
-    path: 'register',
-    element: <Register />
-  },
-
-  {
-    path: 'SignIn',
-    element: <SignIn />
-  },
+  { path: 'register', element: <Register /> },
+  { path: 'SignIn', element: <SignIn /> },
 ]);
 
 export default router;
