@@ -22,26 +22,29 @@ export default function Sidebar({ toggle, handleToggle }) {
         <Price />
         <Rating />
       </div>
-      {
-        window.innerWidth <= 1020 ?
-(        <div
-        className={`fixed top-0 -left-10 bottom-0 z-10 bg-white  rounded-tr-md rounded-br-md  duration-500 ${
-          toggle ? 'mobile:w-[50%]   left-1' : 'tablet:w-0 w-0'
+      {window.innerWidth <= 1020 ? (
+        <div
+          className={`fixed top-0 -left-10 bottom-0 z-10 bg-white  rounded-tr-md rounded-br-md  duration-500 ${
+            toggle ? "mobile:w-[50%]   left-1" : "tablet:w-0 w-0"
           } p-4 mt-16`}
+        >
+          <div
+            className={`mt-10 relative ${
+              toggle ? "tablet:block block" : "tablet:opacity-0 opacity-0"
+            } duration-700`}
           >
-        
-        <div className={`mt-10 relative ${
-          toggle ? 'tablet:block block' : 'tablet:opacity-0 opacity-0'
-        } duration-700`} >
-<i class="fa-solid fa-x absolute right-3 top-3"  onClick={handleToggle}></i>
+            <i
+              className="fa-solid fa-x absolute right-3 top-3"
+              onClick={handleToggle}
+            ></i>
 
-        <Price />
-        <Rating />
+            <Price />
+            <Rating />
+          </div>
         </div>
-      </div>):''
-}
-
-
+      ) : (
+        ""
+      )}
     </>
   );
 }

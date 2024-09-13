@@ -2,7 +2,7 @@
 
 export default function Checking({room}) {
   return (
-    <div className="max-w-md shadow-md rounded-md  bg-white border border-gray-200 overflow-hidden">
+    <div className=" w-full shadow-md rounded-md  bg-white border border-gray-200 overflow-hidden">
       <div className='relative object-cover w-full h-[200px] '>
         <img className="absolute h-full w-full" src={room.imageUrl} alt="Hotel" />
       </div>

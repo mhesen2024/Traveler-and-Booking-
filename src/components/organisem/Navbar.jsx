@@ -58,7 +58,7 @@ function Navbar() {
         </ul>
 
         {isAuthenticated ? (
-          <div className="hidden md:flex items-center gap-5">
+          <div className="hidden tablet:flex items-center gap-5">
             <div className="profile">
               <img
                 src={imgProfile}
@@ -113,11 +113,13 @@ function Navbar() {
             {isAuthenticated ? (
               <div className="flex gap-3 items-center">
                 <div className="profile">
+                  <Link to='profile' onClick={()=>setIsMobileMenuOpen(false)}>
                   <img
                     src={imgProfile}
                     alt="Profile"
-                    className="rounded-full w-10 h-10"
-                  />
+                    className="rounded-full w-10 h-10 object-cover"
+                    />
+                    </Link>
                 </div>
                 <Link
                   to="/SignIn"
