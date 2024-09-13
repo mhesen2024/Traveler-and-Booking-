@@ -12,6 +12,7 @@ export default {
         lg: '3px 3px 6px rgba(0, 0, 0, 0.5)',
       },
       screens: {
+        'xsmall':'500px',
         'mobile':'700px',
         'tablet': '870px',
         // => @media (min-width: 640px) { ... }

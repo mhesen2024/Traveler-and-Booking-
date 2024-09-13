@@ -50,7 +50,7 @@ function Navbar() {
           </Link>
         </div>
 
-        <ul className="hidden md:flex gap-8 text-lg text-[#333]">
+        <ul className="hidden tablet:flex gap-8 text-lg text-[#333]">
           {menuLinks.map((link, index) => (
             <NavLinks key={index} to={link.to} title={link.title} />
           ))}
@@ -76,7 +76,7 @@ function Navbar() {
             </Link>
           </div>
         ) : (
-          <div className="hidden md:flex gap-3">
+          <div className="hidden tablet:flex gap-3">
             <Link
               to="/Register"
               className="border shadow-md border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-600 hover:text-white transition duration-300"
@@ -92,7 +92,7 @@ function Navbar() {
           </div>
         )}
 
-        <div className="md:hidden flex items-center">
+        <div className="tablet:hidden flex items-center">
           <button
             className="text-blue-500 hover:text-blue-600 focus:outline-none"
             onClick={toggleMobileMenu}
@@ -104,7 +104,7 @@ function Navbar() {
         <div
           className={`${
             isMobileMenuOpen ? "block" : "hidden"
-          } md:hidden absolute top-[68px] left-0 w-full bg-white shadow-lg z-10`}
+          } tablet:hidden absolute top-[68px] left-0 w-full bg-white shadow-lg z-10`}
         >
           <ul className="flex flex-col gap-5 text-lg text-[#333] p-5">
             {menuLinks.map((link, index) => (

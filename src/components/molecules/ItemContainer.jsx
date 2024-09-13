@@ -6,7 +6,7 @@ import Logo from '../../views/Logo';
 
 export default function ItemContainer() {
   return (
-    <div className="ml-4 w-full gap-y-3 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-left">
+    <div className="ml-4 w-full gap-y-3 grid xsmall:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-left">
       <div>
         <Logo />
         <p className="text-[#4F4F4F] roboto-regular text-[14px]">
