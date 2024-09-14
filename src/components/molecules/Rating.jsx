@@ -5,8 +5,13 @@ export default function Rating() {
   const { setRatingRange } = useContext(SidebaContext);
   const [activeRating, setActiveRating] = useState(null);
   const handleClick = (rating) => {
-    setActiveRating(rating);
-    setRatingRange(rating);    
+    if (activeRating === rating) {
+      setActiveRating(null);
+      setRatingRange(null);
+    } else {
+      setActiveRating(rating);
+      setRatingRange(rating);
+    }
   };
 
   return (
@@ -23,7 +28,7 @@ export default function Rating() {
             key={rating}
             value={rating}
             onClick={() => handleClick(rating)}
-            className={`flex items-center justify-center border border-gray-300 hover:border-yellow-400 p-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+            className={`flex items-center justify-center border border-gray-300 hover:border-yellow-400 p-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105  ${
               activeRating === rating
                 ? "bg-yellow-200 text-white"
                 : "hover:bg-yellow-100"

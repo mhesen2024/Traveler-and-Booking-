@@ -74,6 +74,7 @@ export default function Discover() {
         </div>
         <div className="w-full xl:w-2/3 mx-auto">
           <FilterTab setSort={setSort} />
+          
           <ResultSearch
             room={room}
             allRoom={allRoom}
