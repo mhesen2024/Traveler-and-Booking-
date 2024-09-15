@@ -1,4 +1,4 @@
-import { Field, Formik, Form } from 'formik';
+import { Field, Formik, Form, ErrorMessage } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { getCountry } from '../../API/endpoint/country';
 import { addCity } from '../../API/endpoint/city';
@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function CityForm() {
   const [countries, setCountries] = useState([]);
+  const [fileName, setFileName] = useState('');
 
   const getCountryData = async () => {
     try {
@@ -123,23 +124,36 @@ export default function CityForm() {
               />
               {errors.Description && touched.Description && <div className="text-red-600 text-sm">{errors.Description}</div>}
             </div>
-            <div className='text-center'>
-              <label htmlFor="image" className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block">
-                <i className="fas fa-image mr-2"></i>
-                Upload Image
-              </label>
-              <input
-                id="image"
-                name="Image"
-                type="file"
-                className="hidden"
-                onChange={(event) => {
-                  const file = event.currentTarget.files[0];
-                  setFieldValue('Image', file);
-                }}
-              />
-              {errors.Image && touched.Image && <div className="text-red-600 text-sm">{errors.Image}</div>}
-            </div>
+
+            <div className="text-center">
+      <label
+        htmlFor="Image"
+        className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block"
+      >
+        <i className="fas fa-image mr-2"></i>
+        Upload Image
+      </label>
+      <input
+        id="Image"
+        name="Image"
+        type="file"
+        className="hidden"
+        onChange={(event) => {
+          const file = event.currentTarget.files[0];
+          if (file) {
+            setFileName(file.name); 
+            setFieldValue('Image', file); 
+          }
+        }}
+      />
+      <ErrorMessage name="Image" component="div" className="text-red-600 text-sm mt-2" />
+
+      {fileName && (
+        <div className="text-sm text-gray-700 mt-2">
+          Selected File: <span className="font-semibold">{fileName}</span>
+        </div>
+      )}
+    </div>
             <button
               type="submit"
               disabled={isSubmitting}

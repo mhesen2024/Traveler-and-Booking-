@@ -14,6 +14,7 @@ import CityForm from '../components/molecules/CityForm';
 import ResidanceForm from '../components/molecules/ResidanceForm';
 import Add from '../views/add';
 import RoomForm from '../components/molecules/RoomForm';
+import Activities from '../views/Activities';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
           { path: 'ResidanceForm', element: <ResidanceForm /> },
         ] 
       },
+      {path: 'Activities' , element:<Activities/>},
       { path: 'contact', element: <Contact /> },
       { path: 'discover/:id', element: <Discover /> },
       { path: 'discover', element: <Discover /> },

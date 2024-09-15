@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from "./Logo";
+import Logo from "../components/atoms/Logo";
 import { useNavigate } from "react-router";
 import profilePic from "../asserts/PNG/profile.png";
 import { Link } from "react-router-dom";

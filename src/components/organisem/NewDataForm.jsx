@@ -10,7 +10,7 @@ const NewDataForm = () => {
     
   return (
     <div className=' space-y-4' >
-     <div className='   '> 
+     <div > 
         <h1 className='  roboto-medium text-center  '> Add New Location Details </h1>
     </div> 
       <div className=' space-y-4' > 

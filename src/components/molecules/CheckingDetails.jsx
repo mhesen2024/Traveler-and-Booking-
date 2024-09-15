@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 export default function Checking({room}) {
@@ -7,7 +8,7 @@ export default function Checking({room}) {
         <img className="absolute h-full w-full" src={room.imageUrl} alt="Hotel" />
       </div>
       <div className="p-5">
-        <a href="#">
+        <Link to="#">
           <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 capitalize">
             {room.residence}
           </h5>
@@ -15,12 +16,12 @@ export default function Checking({room}) {
             <p className=" text-sm font-medium text-gray-600">
             {Array(room.rating)
             .fill()
-            .map((index) => (
+            .map((_,index) => (
               <i key={index} className="fa-solid fa-star text-yellow-400 fa-xs"></i>
             ))}
             </p>
           </div>
-        </a>
+        </Link>
         <div className="cardTextContent my-4 text-sm">
           <p>room number :{room.number}</p>
           <p className="leading-8 text-gray-600">Adults Capacity :{room.adultsCapacity}</p>

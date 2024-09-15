@@ -38,7 +38,7 @@ export default function MenuActivity() {
           <Link
             to="/add/add-room"
             className="flex items-center space-x-4 p-4 rounded-lg bg-blue-500 hover:bg-blue-700 transition-colors duration-300 shadow-md hover:shadow-xl"
-          ><i class="fa-solid fa-restroom text-white fa-xl"></i>
+          ><i className="fa-solid fa-restroom text-white fa-xl"></i>
             <span className="text-white text-lg font-semibold">add room</span>
           </Link>
         </li>

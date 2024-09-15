@@ -4,6 +4,7 @@ import visa from '../../asserts/PNG/visa.png';
 import mastercard from '../../asserts/PNG/mastercard.png';
 import express from '../../asserts/PNG/express.png';
 import discover from '../../asserts/PNG/discover.png';
+import { Link } from 'react-router-dom';
 
 export default function PaymentOptions() {
   const [paymentMethod, setPaymentMethod] = useState('debit');
@@ -76,34 +77,34 @@ export default function PaymentOptions() {
             <form onSubmit={handleSubmit}>
               <div className='ml-3'>
               <div className="mb-4 flex space-x-4">
-                <a href="#visa" className="block">
+                <Link to="#visa" className="block">
                   <img
                     src={visa}
                     alt="Visa"
                     className="h-10 w-20 object-contain bg-gray-200 p-2 rounded-md"
                     />
-                </a>
-                <a href="#mastercard" className="block">
+                </Link>
+                <Link to="#mastercard" className="block">
                   <img
                     src={mastercard}
                     alt="Mastercard"
                     className="h-10 w-20 object-contain bg-gray-200 p-2 rounded-md"
                     />
-                </a>
-                <a href="#express" className="block">
+                </Link>
+                <Link to="#express" className="block">
                   <img
                     src={express}
                     alt="American Express"
                     className="h-10 w-20 object-contain bg-gray-200 p-2 rounded-md"
                     />
-                </a>
-                <a href="#discover" className="block">
+                </Link>
+                <Link to="#discover" className="block">
                   <img
                     src={discover}
                     alt="Discover"
                     className="h-10 w-20 object-contain bg-gray-200 p-2 rounded-md"
                     />
-                </a>
+                </Link>
               </div>
               <div className="mb-4 w-3/4">
                 <label htmlFor="name-on-card" className="block text-gray-700">

@@ -1,14 +1,9 @@
-import "./styling/headerStyle.css";
-export default function Header(){
-    return(
-        <div className="header">
-            <div className="container">
-                <div className="logo">
-                    <a href="#"><i class="fa-solid fa-plane"></i></a>
-                    <p>my Dream Place</p>
-                </div>
-            </div>
-            <p></p>
+export default function Logo() {
+    return (
+        <div className="flex items-center space-x-2">
+                <i className="fa-solid fa-plane text-blue-500 -rotate-45"></i>
+            <p className="ml-1 text-xl font-medium">My Dream Place</p>
         </div>
     );
 }
+

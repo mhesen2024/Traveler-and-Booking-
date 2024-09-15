@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Logo from './Logo';
+import Logo from '../components/atoms/Logo';
 import { signUp } from "../API/endpoint/signUp";
 import { setCredintial } from "../helpers";
 import toast, { Toaster } from 'react-hot-toast';
@@ -49,7 +49,7 @@ export default function Register() {
                 } else {
                     toast.success('SignUp success');
                     setTimeout(() => {
-                        Navigate('SignIn');
+                        Navigate('/SignIn');
                     }, 1500);
                 }
             } catch (error) {

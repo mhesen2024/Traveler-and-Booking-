@@ -2,7 +2,7 @@ import React from 'react';
 
 const PriceDetails = () => {
 return (
-    <div className="w-full  bg-white shadow-md rounded-md w-full">
+    <div className=" bg-white shadow-md rounded-md w-full">
     <div className="bg-emerald-300 p-4 rounded-t-md">
         <h2 className="text-lg font-semibold">Price Details</h2>
     </div>

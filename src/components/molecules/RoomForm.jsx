@@ -1,4 +1,4 @@
-import { Field, Formik } from "formik";
+import { ErrorMessage, Field, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { getResidence } from "../../API/endpoint/Residence";
 import { addRoom, getRoomType } from "../../API/endpoint/room";
@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 export default function RoomForm() {
     const [residences, setResidences] = useState([]);
     const [roomTypes, setRoomTypes] = useState([]);
+    const [fileName, setFileName] = useState('');
 
     const getResidencesApi = async () => {
         try {
@@ -182,23 +183,35 @@ export default function RoomForm() {
                             {errors.Description && touched.Description && <div className="text-red-500 text-sm mt-1">{errors.Description}</div>}
                         </div>
 
-                        <div className="mb-4">
-                        <label htmlFor="Image" className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block">
-                <i className="fas fa-image mr-2"></i>
-                Upload Image
-              </label>
-                            <input
-                id="Image"
-                name="Image"
-                type="file"
-                className="hidden"
-                onChange={(event) => {
-                  const file = event.currentTarget.files[0];
-                  setFieldValue('Image', file);
-                }}
-              />
-                            {errors.Image && touched.Image && <div className="text-red-500 text-sm mt-1">{errors.Image}</div>}
-                        </div>
+                        <div className="text-center">
+      <label
+        htmlFor="Image"
+        className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block"
+      >
+        <i className="fas fa-image mr-2"></i>
+        Upload Image
+      </label>
+      <input
+        id="Image"
+        name="Image"
+        type="file"
+        className="hidden"
+        onChange={(event) => {
+          const file = event.currentTarget.files[0];
+          if (file) {
+            setFileName(file.name); 
+            setFieldValue('Image', file); 
+          }
+        }}
+      />
+      <ErrorMessage name="Image" component="div" className="text-red-600 text-sm mt-2" />
+
+      {fileName && (
+        <div className="text-sm text-gray-700 mt-2">
+          Selected File: <span className="font-semibold">{fileName}</span>
+        </div>
+      )}
+    </div>
 
                         <div className="mb-4">
                             <label htmlFor="Rating" className="block text-sm font-medium text-gray-700">Rating</label>

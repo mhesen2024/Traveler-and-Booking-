@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Logo from "./Logo";
+import Logo from "../components/atoms/Logo";
 import { Login } from "../API/endpoint/signIn";
 import { getProfile } from "../API/endpoint/profile";
 import toast, { Toaster } from 'react-hot-toast';
@@ -124,12 +124,6 @@ export default function SignIn() {
                       Keep me signed in
                     </label>
                   </div>
-                  <Link
-                    to="#"
-                    className="text-sm text-blue-500 hover:underline"
-                  >
-                    Forgot password?
-                  </Link>
                 </div>
                 <button
                   type="submit"

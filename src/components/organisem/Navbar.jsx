@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import NavLinks from "../molecules/NavLinks";
-import Logo from "../../views/Logo";
+import Logo from "../atoms/Logo";
 import profilePic from "../../asserts/PNG/profile.png";
 
 function Navbar() {
@@ -97,7 +97,11 @@ function Navbar() {
             className="text-blue-500 hover:text-blue-600 focus:outline-none"
             onClick={toggleMobileMenu}
           >
-            <i className="fa-solid fa-bars fa-xl"></i>
+            {isMobileMenuOpen ? (
+              <i className="fa-solid fa-x"></i>
+            ) : (
+              <i className="fa-solid fa-bars fa-xl"></i>
+            )}
           </button>
         </div>
 
@@ -113,13 +117,13 @@ function Navbar() {
             {isAuthenticated ? (
               <div className="flex gap-3 items-center">
                 <div className="profile">
-                  <Link to='profile' onClick={()=>setIsMobileMenuOpen(false)}>
-                  <img
-                    src={imgProfile}
-                    alt="Profile"
-                    className="rounded-full w-10 h-10 object-cover"
+                  <Link to="profile" onClick={() => setIsMobileMenuOpen(false)}>
+                    <img
+                      src={imgProfile}
+                      alt="Profile"
+                      className="rounded-full w-10 h-10 object-cover"
                     />
-                    </Link>
+                  </Link>
                 </div>
                 <Link
                   to="/SignIn"

@@ -11,6 +11,7 @@ export default function ResidenceForm() {
   const [cities, setCities] = useState([]);
   const [filterCity, setFilterCity] = useState([]);
   const [residenceTypes, setResidenceTypes] = useState([]);
+  const [fileName, setFileName] = useState('');
 
   const getResidence = async () => {
     try {
@@ -223,22 +224,36 @@ export default function ResidenceForm() {
               <ErrorMessage name="Address" component="div" className="text-red-600 text-sm mt-1" />
             </div>
 
-            <div>
-              <label htmlFor="Image" className="block text-sm font-medium text-gray-700">
-                Image
-              </label>
-              <input
-                type="file"
-                name="Image"
-                onChange={(event) => {
-                  setFieldValue("Image", event.currentTarget.files[0]);
-                }}
-                onBlur={handleBlur}
-                className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-md file:text-sm file:font-semibold file:bg-gray-50 hover:file:bg-gray-100"
-              />
-              <ErrorMessage name="Image" component="div" className="text-red-600 text-sm mt-1" />
-            </div>
+          
+            <div className="text-center">
+      <label
+        htmlFor="Image"
+        className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block"
+      >
+        <i className="fas fa-image mr-2"></i>
+        Upload Image
+      </label>
+      <input
+        id="Image"
+        name="Image"
+        type="file"
+        className="hidden"
+        onChange={(event) => {
+          const file = event.currentTarget.files[0];
+          if (file) {
+            setFileName(file.name); 
+            setFieldValue('Image', file); 
+          }
+        }}
+      />
+      <ErrorMessage name="Image" component="div" className="text-red-600 text-sm mt-2" />
 
+      {fileName && (
+        <div className="text-sm text-gray-700 mt-2">
+          Selected File: <span className="font-semibold">{fileName}</span>
+        </div>
+      )}
+    </div>
             <div>
               <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
                 Email

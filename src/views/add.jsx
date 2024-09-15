@@ -9,7 +9,6 @@ export default function Add() {
     const user = localStorage.getItem("userName");
     setUser(user);
     user == 'Manager' ? '':navigate('/')
-
   })
   return (
     <div>

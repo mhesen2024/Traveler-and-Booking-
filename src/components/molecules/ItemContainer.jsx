@@ -2,7 +2,7 @@
 import React from 'react';
 import Item from './Item';
 import { Company, Explore, Terms, Help } from './Menus';
-import Logo from '../../views/Logo';
+import Logo from '../atoms/Logo';
 
 export default function ItemContainer() {
   return (

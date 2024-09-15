@@ -1,9 +1,10 @@
 import { ErrorMessage, Field, Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { addCountry } from '../../API/endpoint/country';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function CountryForm() {
+  const [fileName, setFileName] = useState('');
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const formData = new FormData();
     formData.append('Name', values.Name);
@@ -89,22 +90,34 @@ export default function CountryForm() {
             </div>
 
             <div className="text-center">
-              <label htmlFor="Image" className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block">
-                <i className="fas fa-image mr-2"></i>
-                Upload Image
-              </label>
-              <input
-                id="Image"
-                name="Image"
-                type="file"
-                className="hidden"
-                onChange={(event) => {
-                  const file = event.currentTarget.files[0];
-                  setFieldValue('Image', file);
-                }}
-              />
-              <ErrorMessage name="Image" component="div" className="text-red-600 text-sm mt-2" />
-            </div>
+      <label
+        htmlFor="Image"
+        className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md inline-block"
+      >
+        <i className="fas fa-image mr-2"></i>
+        Upload Image
+      </label>
+      <input
+        id="Image"
+        name="Image"
+        type="file"
+        className="hidden"
+        onChange={(event) => {
+          const file = event.currentTarget.files[0];
+          if (file) {
+            setFileName(file.name); 
+            setFieldValue('Image', file); 
+          }
+        }}
+      />
+      <ErrorMessage name="Image" component="div" className="text-red-600 text-sm mt-2" />
+
+      {fileName && (
+        <div className="text-sm text-gray-700 mt-2">
+          Selected File: <span className="font-semibold">{fileName}</span>
+        </div>
+      )}
+    </div>
 
             <button
               type="submit"
