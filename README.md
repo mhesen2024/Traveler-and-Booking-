@@ -43,8 +43,7 @@ To run the project locally:
    git clone https://github.com/yourusername/Traveler-and-Booking.git
 
    cd Traveler-and-Booking
-   
-npm install
-npm run dev
+   npm install
+   npm run dev
 
 
