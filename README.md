@@ -34,6 +34,8 @@ The platform allows users to explore various destinations, apply filters and sor
 - **Context API** – For state management across components.  
 - **React Router DOM** – For smooth page navigation.
 
+---
+
  ## 🚀 Getting Started
 
 To run the project locally:
